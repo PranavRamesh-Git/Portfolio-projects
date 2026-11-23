@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PlantPulse </title> 
+
+    <link rel="stylesheet" href="{% static 'monitoring/css/style.css' %}">
+
+    <script src="{% static 'monitoring/js/main1.js' %}" defer></script>
+</head>
+
+<body>
+
+    <header class="site-header">
+
+        <div class="brand-header">
+            <div class="brand-text">
+                <h1>PlantPulse</h1>
+                <p>INDUSTRIAL EQUIPMENT MONITORING</p>
+            </div>
+        </div>
+        {% if user.is_authenticated %}
+
+            <div class="employee-info">
+
+                <p>
+                    LOGGED IN:
+                    {{ user.get_full_name }}
+                    ({{ user.username }})
+                </p>
+
+                <form method="POST" action="{% url 'logout' %}">
+
+                    {% csrf_token %}
+
+                    <button type="submit" class="secondary-btn">
+                        LOGOUT
+                    </button>
+
+                </form>
+
+            </div>        
+        
+        {% endif %}
+        {% block header %}
+        {% endblock %}
+
+    </header>
+
+    {% if messages %}
+        <div class="flash-messages">
+            {% for message in messages %}
+                <div class="flash-message {{ message.tags }}">
+                    <span>{{ message }}</span>
+                    <button class="flash-close"
+                            type="button"
+                            aria-label="Close">&times;</button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <main class="main-container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        &copy; 2026 PlantPulse | Industrial Monitoring System
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+
+{% extends "monitoring/base.html" %}
+
+{% block content %}
+
+<div class="form-container">
+
+    <h2>EMPLOYEE LOGIN</h2>
+
+    <p>Enter your employee ID and password.</p>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="form-error">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <div class="form-group">
+
+            <label for="{{ form.username.id_for_label }}">
+                EMPLOYEE ID
+            </label>
+
+            {{ form.username }}
+
+            {{ form.username.errors }}
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="{{ form.password.id_for_label }}">
+                PASSWORD
+            </label>
+
+            {{ form.password }}
+
+            {{ form.password.errors }}
+
+        </div>
+
+        <input type="hidden" name="next" value="{{ next }}">
+
+        <button type="submit" class="primary-btn">
+            LOGIN
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

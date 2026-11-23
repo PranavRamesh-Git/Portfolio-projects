@@ -1,0 +1,229 @@
+{% extends 'monitoring/base.html' %}
+{% block header %}
+    <nav class="navbar">
+        <button class="navButtons clicked" id="dashboard-button">DASHBOARD</button>
+        <button class="navButtons" id="reading-button">READINGS</button>
+        <button class="navButtons" id="alerts-button">ALERTS</button>
+        <button class="navButtons" id="quickCheck-button">QUICK CHECK</button>
+    </nav>
+{% endblock %}
+
+{% block content %}
+
+<section id="dashboard-section" class="pagesection active">
+
+    <h2>DASHBOARD</h2>
+
+    <div class="dashboard-intro">
+        <h3>Industrial Facility Monitoring</h3>
+        <p>
+            Select a facility to view equipment status,
+            sensor distribution and maintenance information.
+        </p>
+    </div>
+
+    <!-- CSRF TOKEN FOR AJAX REQUESTS -->
+    <form id="csrf-form" hidden>
+        {% csrf_token %}
+    </form>
+
+    <!-- FACILITY SELECTION -->
+    <div class="facility-section">
+
+        <h3>SELECT FACILITY</h3>
+
+        <div class="facility-grid">
+            {% for facility in facilities %}
+                <div>
+                    <p class="facility-name">{{ facility.name }}</p>
+                    <p class="facility-location">{{ facility.city }}, {{ facility.country }}</p>
+                    <button type="button" class="view-stats" data-id="{{ facility.id }}" data-name="{{ facility.name }}">CLICK FOR DETAILS</button>
+                </div>
+
+            {% empty %}
+                <p>No facilities registered.</p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <!-- FACILITY DASHBOARD MODAL -->
+    <div id="facility-dashboard" class="facility-modal">
+        <div class="facility-modal-content"  role="dialog" aria-modal="true" aria-labelledby="selected-facility-name">
+            <div class="modal-header">
+                <div>
+                    <p>Equipment and sensor monitoring overview</p>
+                </div>
+            </div>
+            <div class="modal-body">
+
+                <h3 class="section-subheading">
+                    SENSOR OVERVIEW
+                </h3>
+
+                <div id="stats-container" class="stats-grid">
+
+                </div>
+
+                <h3 class="section-subheading">
+                    EQUIPMENT OVERVIEW
+                </h3>
+
+                <div id="machines-container" class="machine-grid">
+
+                </div>
+                <div id="remarks" class="remarks">
+                    
+
+                </div>                
+            </div>
+
+            <button id="close-modal">CLOSE</button>
+
+        </div>
+
+    </div>
+
+
+
+</section>
+
+
+<!-- READINGS SECTION -->
+<section id="reading-section" class="pagesection">
+
+    <h2>VIEW MACHINE READINGS</h2>
+
+    <h3>SELECT FACILITY</h3>
+
+    <nav class="facility-navbar">
+        {% for facility in facilities %}
+            <div class="facility-option">
+                <p class="facility-name">{{ facility.name }}</p>
+                <p class="facility-location">
+                    {{ facility.city }}, {{ facility.country }}
+                </p>
+
+                <button type="button"
+                        class="view-reading"
+                        data-id="{{ facility.id }}">
+                    SELECT FACILITY
+                </button>
+            </div>
+        {% endfor %}
+    </nav>
+
+    <div class="section-results">
+        <h3>SENSOR READINGS</h3>
+
+        <div id="readings-container" class="results-container">
+            <p class="empty-message">
+                Select a facility to view its sensor readings.
+            </p>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- ALERTS SECTION -->
+<section id="alerts-section" class="pagesection">
+
+    <h2>ALERTS</h2>
+
+    <h3>SELECT FACILITY</h3>
+
+    <nav class="facility-navbar">
+        {% for facility in facilities %}
+            <div class="facility-option">
+                <p class="facility-name">{{ facility.name }}</p>
+                <p class="facility-location">
+                    {{ facility.city }}, {{ facility.country }}
+                </p>
+
+                <button type="button"
+                        class="view-alerts"
+                        data-id="{{ facility.id }}">
+                    SELECT FACILITY
+                </button>
+            </div>
+        {% endfor %}
+    </nav>
+
+    <div class="section-results">
+        <h3>FACILITY ALERTS</h3>
+
+        <div id="alerts-container" class="results-container">
+            <p class="empty-message">
+                Select a facility to view its alerts.
+            </p>
+        </div>
+    </div>
+
+</section>
+<section id="quickCheck-section" class="pagesection">
+    <h2>QUICKCHECK - SENSOR READINGS</h2>
+
+    <div class="quickcheck-filters">
+
+        <div class="form-group">
+
+            <label for="quickcheck-code">
+                SENSOR CODE
+            </label>
+
+            <input
+                type="text"
+                id="quickcheck-code"
+                placeholder="Enter sensor code"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="quickcheck-breach">
+                BREACH STATUS
+            </label>
+
+            <select id="quickcheck-breach">
+
+                <option value="all">All readings</option>
+                <option value="true">Breaches only</option>
+                <option value="false">Normal only</option>
+
+            </select>
+
+        </div>
+
+        <button type="button" id="quickcheck-search">
+            SEARCH
+        </button>
+
+    </div>
+
+    <p id="quickcheck-message"></p>
+
+    <div id="quickcheck-results"></div>
+
+    <div class="quickcheck-pagination" id="quickcheck-pagination" hidden>
+
+        <button type="button" id="quickcheck-prev">
+            PREVIOUS
+        </button>
+
+        <span id="quickcheck-page-info"></span>
+
+        <button type="button" id="quickcheck-next">
+            NEXT
+        </button>
+
+    </div>    
+</section>
+
+
+
+
+    
+
+{% endblock %}

@@ -1,0 +1,124 @@
+CREATE VIEW view_sensor_reading_details AS
+ SELECT 
+ 	s.id as sensor_id,
+	s.max_threshold,
+	s.min_threshold,
+	s.is_active,
+	r.id as reading_id,
+	r.value,
+	r.recorded_at,
+	r.received_at,
+	r.is_breach
+FROM monitoring_reading as r
+JOIN monitoring_sensor as s
+	ON r.sensor_id = s.id
+
+
+
+
+CREATE OR REPLACE FUNCTION create_sensor_alert()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    sensor_data RECORD;
+    v_alert_type VARCHAR(20);
+    v_threshold NUMERIC(10,2);
+
+BEGIN
+
+    -- 1. Retrieve sensor and reading details
+    SELECT *
+    INTO sensor_data
+    FROM view_sensor_reading_details
+    WHERE reading_id = NEW.id;
+
+    IF NOT FOUND THEN
+        RETURN NEW;
+    END IF;
+
+    -- 2. Determine breach direction
+    IF sensor_data.max_threshold IS NOT NULL
+       AND NEW.value > sensor_data.max_threshold THEN
+
+        v_alert_type := 'HIGH';
+        v_threshold := sensor_data.max_threshold;
+
+    ELSIF sensor_data.min_threshold IS NOT NULL
+          AND NEW.value < sensor_data.min_threshold THEN
+
+        v_alert_type := 'LOW';
+        v_threshold := sensor_data.min_threshold;
+
+    ELSE
+
+        RETURN NEW;
+
+    END IF;
+
+    -- 3. Insert a new alert or update an existing OPEN alert
+    INSERT INTO monitoring_alert (
+        sensor_id,
+        reading_id,
+        alert_type,
+        severity,
+        status,
+        reading_value,
+        threshold_value,
+        occurrence_count,
+        message,
+        created_at,
+        acknowledged_by,
+        resolution_note
+    )
+
+    VALUES (
+        NEW.sensor_id,
+        NEW.id,
+        v_alert_type,
+        'WARNING',
+        'OPEN',
+        NEW.value,
+        v_threshold,
+        1,
+        'Sensor threshold breached',
+        NOW(),
+        '',
+        ''
+    )
+
+    ON CONFLICT (sensor_id)
+    WHERE status = 'OPEN'
+
+    DO UPDATE SET
+
+        reading_id = EXCLUDED.reading_id,
+
+        reading_value = EXCLUDED.reading_value,
+
+        threshold_value = EXCLUDED.threshold_value,
+
+        alert_type = EXCLUDED.alert_type,
+
+        occurrence_count = monitoring_alert.occurrence_count + 1,
+
+        severity = CASE
+            WHEN monitoring_alert.occurrence_count + 1 > 4
+                THEN 'CRITICAL'
+            ELSE 'WARNING'
+        END,
+
+        message = EXCLUDED.message;
+
+    RETURN NEW;
+
+END;
+$$;
+
+
+CREATE TRIGGER trg_sensor_alert
+AFTER INSERT
+ON monitoring_reading
+FOR EACH ROW
+WHEN (NEW.is_breach = TRUE)
+EXECUTE FUNCTION create_sensor_alert();

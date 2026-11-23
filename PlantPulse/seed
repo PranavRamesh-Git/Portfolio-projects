@@ -1,0 +1,228 @@
+
+BEGIN;
+
+
+-- 1. FACILITIES
+
+INSERT INTO monitoring_facility
+    (code, name, city, country, address, contact_email, is_active, created_at)
+VALUES
+    ('PUN-01', 'Pune Plant', 'Pune', 'India',
+     'Plot 14, MIDC Chakan Industrial Area, Pune, Maharashtra 410501',
+     'pune.maintenance@plantpulse.example', TRUE, NOW()),
+    ('CHN-01', 'Chennai Plant', 'Chennai', 'India',
+     'Plot 22, SIPCOT Industrial Park, Sriperumbudur, Tamil Nadu 602105',
+     'chennai.maintenance@plantpulse.example', TRUE, NOW()),
+    ('AMD-01', 'Ahmedabad Plant', 'Ahmedabad', 'India',
+     'Plot 8, GIDC Sanand Industrial Estate, Ahmedabad, Gujarat 382110',
+     'ahmedabad.maintenance@plantpulse.example', TRUE, NOW()),
+    ('BLR-01', 'Bengaluru Plant', 'Bengaluru', 'India',
+     'No. 45, Peenya Industrial Area Phase II, Bengaluru, Karnataka 560058',
+     'bengaluru.maintenance@plantpulse.example', TRUE, NOW()),
+    ('CBE-01', 'Coimbatore Plant', 'Coimbatore', 'India',
+     'Plot 31, SIDCO Industrial Estate, Kurichi, Coimbatore, Tamil Nadu 641021',
+     'coimbatore.maintenance@plantpulse.example', TRUE, NOW()),
+    -- Still being built: no machines yet (tests your dashboard's "empty" state)
+    ('NGP-01', 'Nagpur Plant', 'Nagpur', 'India',
+     'Plot 5, MIDC Butibori, Nagpur, Maharashtra 441122',
+     'nagpur.projects@plantpulse.example', FALSE, NOW())
+ON CONFLICT (code) DO UPDATE SET
+    name = EXCLUDED.name, city = EXCLUDED.city, country = EXCLUDED.country,
+    address = EXCLUDED.address, contact_email = EXCLUDED.contact_email,
+    is_active = EXCLUDED.is_active;
+
+
+
+-- 2. MACHINES (facility looked up by its code)
+
+INSERT INTO monitoring_machine
+    (facility_id, asset_tag, name, machine_type, status, criticality,
+     manufacturer, model_number, serial_number, department, plant_location,
+     installed_on, last_maintenance, next_maintenance, remarks, created_at)
+SELECT f.id, v.asset_tag, v.name, v.machine_type, v.status, v.criticality,
+       v.manufacturer, v.model_number, v.serial_number, v.department, v.plant_location,
+       v.installed_on::date, v.last_maintenance::date, v.next_maintenance::date,
+       v.remarks, NOW()
+FROM (VALUES
+    ('PUN-01', 'A-101', 'Main motor', 'MOTOR', 'RUNNING', 'HIGH',
+     'Siemens', 'SIMO-160M-4P', 'SIE-2021-004417', 'Production', 'Bay 1, Line 1',
+     '2021-03-15', '2026-09-12', '2026-12-12',
+     'Drives the main mixing line. 30 kW, 1500 rpm.'),
+    ('PUN-01', 'A-102', 'Coolant pump', 'PUMP', 'RUNNING', 'CRITICAL',
+     'Kirloskar Brothers', 'KDS-538', 'KBL-2022-118203', 'Utilities', 'Pump house, Bay 2',
+     '2022-07-01', '2026-08-20', '2026-11-20',
+     'Supplies coolant to Line 1 and Line 2. No standby pump.'),
+    ('AMD-01', 'A-103', 'Air compressor', 'COMPRESSOR', 'MAINTENANCE', 'HIGH',
+     'Atlas Copco', 'GA-37-VSD', 'ATC-2020-559012', 'Utilities', 'Compressor room',
+     '2020-11-20', '2026-11-17', '2027-02-17',
+     'Under maintenance: air filter and oil separator replacement.'),
+    ('BLR-01', 'A-104', 'Boiler feed pump', 'PUMP', 'IDLE', 'HIGH',
+     'Grundfos', 'CR-15-5', 'GRF-2023-770145', 'Utilities', 'Boiler house',
+     '2023-05-08', '2026-10-02', '2027-01-02',
+     'Standby pump. Runs only when the boiler is firing.'),
+    ('CHN-01', 'B-201', 'Conveyor belt', 'CONVEYOR', 'RUNNING', 'MEDIUM',
+     'Fenner India', 'FX-1200', 'FEN-2023-031876', 'Production', 'Line 3, Assembly',
+     '2023-01-10', '2026-08-10', '2026-11-10',
+     'Maintenance overdue. Operators report the belt sounds loose.'),
+    ('CHN-01', 'B-202', 'Packing motor', 'MOTOR', 'RUNNING', 'LOW',
+     'ABB', 'M3BP-132', 'ABB-2022-662390', 'Packaging', 'Packing hall, Line 4',
+     '2022-02-14', '2026-10-15', '2027-01-15',
+     'Spare motor available in store.'),
+    ('CBE-01', 'B-203', 'Hydraulic pump', 'PUMP', 'RUNNING', 'HIGH',
+     'Bosch Rexroth', 'A10VSO-45', 'BRX-2021-208851', 'Production', 'Press shop',
+     '2021-09-30', '2026-07-25', '2026-12-25',
+     'Powers the 200-ton press. Check for oil leaks on the seals.')
+) AS v(facility_code, asset_tag, name, machine_type, status, criticality,
+       manufacturer, model_number, serial_number, department, plant_location,
+       installed_on, last_maintenance, next_maintenance, remarks)
+JOIN monitoring_facility f ON f.code = v.facility_code
+ON CONFLICT (asset_tag) DO UPDATE SET
+    facility_id = EXCLUDED.facility_id, name = EXCLUDED.name,
+    machine_type = EXCLUDED.machine_type, status = EXCLUDED.status,
+    criticality = EXCLUDED.criticality, manufacturer = EXCLUDED.manufacturer,
+    model_number = EXCLUDED.model_number, serial_number = EXCLUDED.serial_number,
+    department = EXCLUDED.department, plant_location = EXCLUDED.plant_location,
+    installed_on = EXCLUDED.installed_on, last_maintenance = EXCLUDED.last_maintenance,
+    next_maintenance = EXCLUDED.next_maintenance, remarks = EXCLUDED.remarks;
+
+
+-- 3. SENSORS (two per machine; machine looked up by asset tag)
+
+INSERT INTO monitoring_sensor
+    (machine_id, code, sensor_type, unit, min_threshold, max_threshold,
+     manufacturer, model_number, sensor_location, installed_on, last_calibrated,
+     remarks, is_active, created_at)
+SELECT m.id, v.code, v.sensor_type, v.unit, v.min_t, v.max_t,
+       v.manufacturer, v.model_number, v.sensor_location,
+       v.installed_on::date, v.last_calibrated::date, v.remarks, TRUE, NOW()
+FROM (VALUES
+    ('A-101', 'A-101-TEMP', 'TEMPERATURE', '°C',   NULL::numeric, 85.00::numeric,
+     'WIKA', 'TR10-PT100', 'Motor winding', '2021-03-15', '2026-03-10',
+     'PT100 probe embedded in stator winding.'),
+    ('A-101', 'A-101-VIB',  'VIBRATION',   'mm/s', NULL,  7.10,
+     'SKF', 'CMSS-2200', 'Drive-end bearing', '2021-03-15', '2026-03-10',
+     'Limit follows ISO 10816 zone C for this motor size.'),
+    ('A-102', 'A-102-TEMP', 'TEMPERATURE', '°C',   NULL, 80.00,
+     'Endress+Hauser', 'TM311', 'Pump casing', '2022-07-01', '2026-01-18', ''),
+    ('A-102', 'A-102-PRES', 'PRESSURE',    'bar',  2.00,  6.00,
+     'Danfoss', 'MBS-3000', 'Discharge line', '2022-07-01', '2026-01-18',
+     'Below 2 bar means coolant is not reaching the lines.'),
+    ('A-103', 'A-103-TEMP', 'TEMPERATURE', '°C',   NULL, 90.00,
+     'WIKA', 'TR10-PT100', 'Compressor outlet', '2020-11-20', '2025-10-05',
+     'Calibration overdue.'),
+    ('A-103', 'A-103-PRES', 'PRESSURE',    'bar',  6.00, 10.00,
+     'WIKA', 'S-20', 'Air receiver tank', '2020-11-20', '2025-10-05',
+     'Calibration overdue.'),
+    ('A-104', 'A-104-TEMP', 'TEMPERATURE', '°C',   NULL, 80.00,
+     'Endress+Hauser', 'TM311', 'Pump casing', '2023-05-08', '2026-05-08', ''),
+    ('A-104', 'A-104-PRES', 'PRESSURE',    'bar',  2.00,  6.00,
+     'Danfoss', 'MBS-3000', 'Discharge line', '2023-05-08', '2026-05-08', ''),
+    ('B-201', 'B-201-TEMP', 'TEMPERATURE', '°C',   NULL, 75.00,
+     'Honeywell', 'STT-850', 'Drive gearbox', '2023-01-10', '2026-01-12', ''),
+    ('B-201', 'B-201-VIB',  'VIBRATION',   'mm/s', NULL,  4.50,
+     'ifm', 'VVB-001', 'Head pulley bearing', '2023-01-10', '2026-01-12', ''),
+    ('B-202', 'B-202-TEMP', 'TEMPERATURE', '°C',   NULL, 85.00,
+     'WIKA', 'TR10-PT100', 'Motor winding', '2022-02-14', '2026-02-20',
+     'Short spikes seen during start-up.'),
+    ('B-202', 'B-202-VIB',  'VIBRATION',   'mm/s', NULL,  7.10,
+     'SKF', 'CMSS-2200', 'Drive-end bearing', '2022-02-14', '2026-02-20', ''),
+    ('B-203', 'B-203-TEMP', 'TEMPERATURE', '°C',   NULL, 80.00,
+     'Honeywell', 'STT-850', 'Hydraulic oil tank', '2021-09-30', '2026-04-02', ''),
+    ('B-203', 'B-203-PRES', 'PRESSURE',    'bar',  2.00,  6.00,
+     'Danfoss', 'MBS-3000', 'Pump outlet', '2021-09-30', '2026-04-02', '')
+) AS v(asset_tag, code, sensor_type, unit, min_t, max_t,
+       manufacturer, model_number, sensor_location, installed_on, last_calibrated, remarks)
+JOIN monitoring_machine m ON m.asset_tag = v.asset_tag
+ON CONFLICT (code) DO UPDATE SET
+    machine_id = EXCLUDED.machine_id, sensor_type = EXCLUDED.sensor_type,
+    unit = EXCLUDED.unit, min_threshold = EXCLUDED.min_threshold,
+    max_threshold = EXCLUDED.max_threshold, manufacturer = EXCLUDED.manufacturer,
+    model_number = EXCLUDED.model_number, sensor_location = EXCLUDED.sensor_location,
+    installed_on = EXCLUDED.installed_on, last_calibrated = EXCLUDED.last_calibrated,
+    remarks = EXCLUDED.remarks, is_active = EXCLUDED.is_active;
+
+
+
+
+
+-- 4. SAFETY GUARD
+DO $$
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM monitoring_alert a
+        JOIN monitoring_sensor s ON s.id = a.sensor_id
+        JOIN monitoring_machine m ON m.id = s.machine_id
+        WHERE m.asset_tag IN (
+            'A-101', 'A-102', 'A-103', 'A-104',
+            'B-201', 'B-202', 'B-203'
+        )
+    )
+    OR EXISTS (
+        SELECT 1
+        FROM monitoring_reading r
+        JOIN monitoring_sensor s ON s.id = r.sensor_id
+        JOIN monitoring_machine m ON m.id = s.machine_id
+        WHERE m.asset_tag IN (
+            'A-101', 'A-102', 'A-103', 'A-104',
+            'B-201', 'B-202', 'B-203'
+        )
+    )
+    THEN
+        RAISE EXCEPTION
+            'Sample machines already have readings or alerts.';
+    END IF;
+END $$;
+
+
+-- 5. READINGS (29 rows)
+-- is_breach is calculated from the sensor's limits, never typed in.
+
+INSERT INTO monitoring_reading (sensor_id, value, recorded_at, received_at, is_breach)
+SELECT s.id,
+       v.value,
+       NOW() - v.ago::interval,
+       NOW() - v.ago::interval + INTERVAL '1 second',     -- arrived a second later
+       COALESCE(v.value > s.max_threshold, FALSE)
+         OR COALESCE(v.value < s.min_threshold, FALSE)
+FROM (VALUES
+    -- A-101 Main motor: healthy
+    ('A-101-TEMP', 61.80, '30 minutes'),
+    ('A-101-TEMP', 63.20, '5 minutes'),
+    ('A-101-VIB',   2.40, '30 minutes'),
+    ('A-101-VIB',   2.70, '5 minutes'),
+    -- A-102 Coolant pump: temperature jumps to 94 °C (limit 80)
+    ('A-102-TEMP', 72.40, '30 minutes'),
+    ('A-102-TEMP', 78.10, '20 minutes'),
+    ('A-102-TEMP', 94.00, '10 minutes'),    -- breach -> alert 1
+    ('A-102-TEMP', 95.20, '5 minutes'),     -- still breaching (occurrence 2)
+    ('A-102-PRES',  4.50, '30 minutes'),
+    ('A-102-PRES',  4.40, '5 minutes'),
+    -- A-103 Air compressor: offline since maintenance began, last reading yesterday
+    ('A-103-TEMP', 58.30, '26 hours'),
+    ('A-103-PRES',  7.80, '26 hours'),
+    -- A-104 Boiler feed pump: idle, low and steady
+    ('A-104-TEMP', 32.10, '30 minutes'),
+    ('A-104-TEMP', 31.90, '5 minutes'),
+    ('A-104-PRES',  2.50, '30 minutes'),
+    ('A-104-PRES',  2.60, '5 minutes'),
+    -- B-201 Conveyor: loose belt, vibration stuck high (limit 4.5)
+    ('B-201-TEMP', 60.20, '30 minutes'),
+    ('B-201-TEMP', 61.00, '5 minutes'),
+    ('B-201-VIB',   8.70, '30 minutes'),    -- breach -> alert 2
+    ('B-201-VIB',   8.95, '5 minutes'),     -- still breaching (occurrence 2)
+    -- B-202 Packing motor: one start-up spike 3 hours ago, normal since
+    ('B-202-TEMP', 92.00, '3 hours'),       -- breach -> alert 4 (resolved)
+    ('B-202-TEMP', 63.10, '30 minutes'),
+    ('B-202-TEMP', 62.40, '5 minutes'),
+    ('B-202-VIB',   2.80, '30 minutes'),
+    ('B-202-VIB',   2.60, '5 minutes'),
+    -- B-203 Hydraulic pump: pressure dropping below 2.0 bar (leak)
+    ('B-203-TEMP', 58.70, '30 minutes'),
+    ('B-203-TEMP', 59.40, '5 minutes'),
+    ('B-203-PRES',  1.85, '20 minutes'),    -- breach -> alert 3
+    ('B-203-PRES',  1.78, '5 minutes')      -- still breaching (occurrence 2)
+) AS v(code, value, ago)
+JOIN monitoring_sensor s ON s.code = v.code;
+
+COMMIT;

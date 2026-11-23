@@ -1,0 +1,69 @@
+
+{% extends "monitoring/base.html" %}
+
+{% block content %}
+
+<div class="form-container">
+
+    <h2>EDIT ALERT</h2>
+
+    <h3>{{ object.sensor.code }} - {{ object.sensor.machine.name }}</h3>
+    <h3> READING VALUE: {{ object.reading_value }} - THRESHOLD VALUE :{{ object.threshold_value }}</h3>
+    <h3>OCCURRENCE COUNT - {{ object.occurrence_count }}</h3>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+
+        <div class="form-group">
+
+            {{ form.status.label_tag }}
+
+            {{ form.status }}
+
+            {{ form.status.errors }}
+
+        </div>
+
+        <div class="form-group">
+
+            {{ form.message.label_tag }}
+
+            {{ form.message }}
+
+            {{ form.message.errors }}
+
+        </div>
+
+        <div class="form-group">
+
+            {{ form.resolution_note.label_tag }}
+
+            {{ form.resolution_note }}
+
+            {{ form.resolution_note.errors }}
+
+        </div>
+
+
+
+        <div class="form-actions">
+
+            <button type="submit" class="save-btn">
+                SAVE CHANGES
+            </button>
+
+            <a href="{% url 'home_page' %}"
+               class="secondary-btn">
+                CANCEL
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

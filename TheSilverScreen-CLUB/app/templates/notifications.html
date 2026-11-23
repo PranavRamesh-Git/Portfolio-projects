@@ -1,0 +1,37 @@
+<div id="notifications">
+
+    {% for notif in notification_details %}
+
+        <div class="notification-message">
+
+            <p>{{ notif.message }}</p>
+
+            {% if notif.notif_type == "receiver"
+                  and notif.connection
+                  and notif.connection.status == "PENDING" %}
+
+                <button
+                    type="button"
+                    id="accept-{{ notif.notification_id }}"
+                    class="accept"
+                    data-id="{{ notif.notification_id }}"
+                >
+                    ACCEPT
+                </button>
+
+                <button
+                    type="button"
+                    id="decline-{{ notif.notification_id }}"
+                    class="decline"
+                    data-id="{{ notif.notification_id }}"
+                >
+                    DECLINE
+                </button>
+
+            {% endif %}
+
+        </div>
+
+    {% endfor %}
+
+</div>

@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="screen-profile-form">
+    <form action="{{ url_for('auth.createProfile')}}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <label>The SILVER SCREEN CLUB RAPID FIRE!!!</label>
+
+        <fieldset>
+            <legend>FAVOURITES</legend>
+
+            <div class="q">
+                <label for="comfort_watch">Your comfort show/Movie you rewatch when life gets messy</label>
+                <input type="text" id="comfort_watch" name="comfort_watch">
+            </div>
+
+            <div class="q">
+                <label for="quote_movie">A movie or show you can quote almost word for word</label>
+                <input type="text" id="quote_movie" name="quote_movie">
+            </div>
+
+
+            <div class="q">
+                <label for="erase_memory">A show/Movie you wish you could erase from your memory just to watch it fresh again</label>
+                <input type="text" id="erase_memory" name="erase_memory">
+            </div>
+
+            <div class="q">
+                <label for="soundtrack">Movie or show with the best soundtrack</label>
+                <input type="text" id="soundtrack" name="soundtrack">
+            </div>
+
+            <div class="q">
+                <label for="fav_actor">Your favourite actor </label>
+                <input type="text" id="fav_actor" name="fav_actor">
+            </div>
+
+            <div class="q">
+                <label for="fav_actress">Your favourite actress </label>
+                <input type="text" id="fav_actress" name="fav_actress">
+            </div>            
+            <div class="q">
+                <label for="villain">The best villain of ALL TIME</label>
+                <input type="text" id="villain" name="villain">
+            </div>
+
+            <div class="q">
+                <label for="fav_director">NAME YOUR FAVOURITE DIRECTOR OF ALL TIME</label>
+                <input type="text" id="fav_director" name="fav_director">
+            </div>
+
+            <div class="q">
+                <label for="cinefile-movie">NAME THE MOVIE / SHOW THAT MADE YOU THE CINEFILE YOU ARE NOW</label>
+                <input type="text" id="cinefile-movie" name="cinefile-movie">
+            </div>
+            <div class="q">
+                <span class="label">Your fav genres</span>
+                <span class="hint">Pick as many as you like</span>
+                <div class="chips">
+                    <label><input type="checkbox" name="genres" value="comedy"> Comedy</label>
+                    <label><input type="checkbox" name="genres" value="thriller"> Thriller</label>
+                    <label><input type="checkbox" name="genres" value="horror"> Horror</label>
+                    <label><input type="checkbox" name="genres" value="romance"> Romance</label>
+                    <label><input type="checkbox" name="genres" value="scifi"> Sci-fi</label>
+                    <label><input type="checkbox" name="genres" value="fantasy"> Fantasy</label>
+                    <label><input type="checkbox" name="genres" value="crime"> True crime</label>
+                    <label><input type="checkbox" name="genres" value="animation"> Animation</label>
+                    <label><input type="checkbox" name="genres" value="documentary"> Documentary</label>
+                    <label><input type="checkbox" name="genres" value="kdrama"> K-drama</label>
+                    <label><input type="checkbox" name="genres" value="sports">Sports</label>
+                    <label><input type="checkbox" name="genres" value="Period">Period</label>
+                    <label><input type="checkbox" name="genres" value="comingofage">Coming of age</label>
+                    <label><input type="checkbox" name="genres" value="musicals">Musicals</label>
+                    <label><input type="checkbox" name="genres" value="romcoms">Rom coms</label>
+                    <label><input type="checkbox" name="genres" value="drama"> Drama</label>
+                    <label><input type="checkbox" name="genres" value="blockbuster">Blockbuster popcorn movies</label>
+                    <label><input type="checkbox" name="genres" value="chicflick">Chicflicks</label>
+                </div>
+            </div>            
+        </fieldset>
+
+        <fieldset>
+        <legend>WE NEED YOUR OPINIONS !!!!!</legend>
+
+            <div class="q">
+                <label for="overrated">A popular movie or show you think is overrated</label>
+                <input type="text" id="overrated" name="overrated">
+                <span class="hint">No judgement. Okay, a little judgement.</span>
+            </div>
+
+            <div class="q">
+                <label for="underrated">A popular movie or show you think is underrated</label>
+                <input type="text" id="underrated" name="underrated">
+            </div>
+
+            <div class="q">
+                <label for="guilty_pleasure">Your guilty pleasure watch</label>
+                <input type="text" id="guilty_pleasure" name="guilty_pleasure">
+            </div>
+
+
+
+            <div class="q">
+                <span class="label">Book or movie: which is usually better?</span>
+                <div class="chips">
+                <label><input type="radio" name="book_vs_movie" value="book"> The book, always</label>
+                <label><input type="radio" name="book_vs_movie" value="movie"> The movie</label>
+                <label><input type="radio" name="book_vs_movie" value="depends"> Depends on the director</label>
+                <label><input type="radio" name="book_vs_movie" value="no_books"> Not a reader, I watch</label>
+                </div>
+            </div>
+
+
+            <div class="q">
+                <span class="label">What sort of cinefile are you</span>
+                <div class="chips">
+                <label><input type="radio" name="watch_style" value="binge"> Binge it all tonight</label>
+                <label><input type="radio" name="watch_style" value="weekly"> Weekly, savor it</label>
+                <label><input type="radio" name="watch_style" value="wait"> Wait till it ends, then binge</label>
+                <label><input type="radio" name="watch_style" value="theatre">The theatre only </label>
+                <label><input type="radio" name="watch_style" value="seen all">The one who has seen it all</label>
+                <label><input type="radio" name="watch_style" value="Physical media">Physical media hoarder</label>
+                <label><input type="radio" name="watch_style" value="streamer">Will watch on streaming only</label>
+                </div>
+            </div>
+
+            <div class="q">
+                <span class="label">Subtitles?</span>
+                <div class="chips">
+                <label><input type="radio" name="subtitles" value="always"> Always on</label>
+                <label><input type="radio" name="subtitles" value="foreign_only"> Only for other languages</label>
+                <label><input type="radio" name="subtitles" value="never"> Never</label>
+                </div>
+            </div>
+
+            <div class="q">
+                <label for="theatre_seat">Your seat in the theatre</label>
+                <select id="theatre_seat" name="theatre_seat">
+                <option value="">Choose one</option>
+                <option value="front">Front row, neck pain is worth it</option>
+                <option value="middle">Dead center, perfect sound</option>
+                <option value="back">Back row, see everything</option>
+                <option value="aisle">Aisle seat, snack runs</option>
+                <option value="couch">My couch, thanks</option>
+                <option value="bed">My bed, thanks</option>
+                </select>
+            </div>
+
+            <div class="q">
+                <label for="snack">Go-to movie snack</label>
+                <select id="snack" name="snack">
+                <option value="">Choose one</option>
+                <option value="salted_popcorn">Salted popcorn</option>
+                <option value="caramel_popcorn">Caramel popcorn</option>
+                <option value="nachos">Nachos</option>
+                <option value="samosa">Samosa and chai</option>
+                <option value="candy">Candy</option>
+                <option value="nothing">Nothing, focus is only on the screen</option>
+                </select>
+            </div>                
+ 
+            <div class="q">
+                <label for="spoiler_tolerance">Spoiler tolerance</label>
+                <div class="range-row">
+                    <span>Ruin my life</span>
+                    <input type="range" id="spoiler_tolerance" name="spoiler_tolerance" min="0" max="10" value="3">
+                    <span>Tell me everything</span>
+                </div>
+            </div>        
+
+            <div class="q">
+                <label for="cried">The  movie or show that always makes you cry</label>
+                <input type="text" id="cried" name="cried">
+            </div>
+
+            <div class="q">
+                <label for="plot_twist">The best  plot twist ever</label>
+                <input type="text" id="plot_twist" name="plot_twist">
+                <span class="hint">Title only, please. Spoilers stay off profiles.</span>
+            </div>
+
+            <div class="q">
+                <label for="recommend">One thing everyone should watch at least once</label>
+                <textarea id="recommend" name="recommend" placeholder="And why?"></textarea>
+            </div>
+
+        </fieldset>
+
+        <button type="submit">
+            Save my screen profile
+        </button>
+    </form>
+</div>    
+
+{% endblock %}

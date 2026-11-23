@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="auth-page">
+
+  <h1>REGISTER</h1>
+
+  <div class="form">
+    <form action="{{ url_for('auth.register') }}" method="POST">
+       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div>
+          <label>FULL NAME: </label>
+          <input type="text" name="fullname" placeholder="FULL NAME .....">
+        </div>
+
+        <div>
+          <label>USERNAME : </label>
+          <input type="text" name="username" placeholder="USERNAME .....">
+        </div>         
+
+        <div>
+          <label>PASSWORD : </label>
+          <input type="password" name="password" placeholder="PASSWORD.....">
+        </div>
+
+        <div>
+          <label>Phone Number : </label>
+          <input type="text" name="phone" placeholder="PHONE NUMBER .....">
+        </div>
+        
+        <div>
+          <label>EMAIL : </label>
+          <input type="text" name="email" placeholder="EMAIL .....">
+        </div>
+         
+        <div class="buttons">
+          <button type="submit" id="register">REGISTER</button>   
+        </div>
+        
+    </form>
+  </div>
+
+</section>
+
+
+
+{% endblock %}

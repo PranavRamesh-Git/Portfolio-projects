@@ -1,0 +1,500 @@
+{% extends 'base.html' %}
+{% block content %}
+    <header class="header">
+        <h1>THE SILVER SCREEN - CLUB</h1>
+        <nav class="navbar">
+            <button id="movie-selection" class="navButtons">Movies</button>
+            <button id="tv-selection" class="navButtons">TV</button>
+            <button id="trending-selection" class="navButtons">TRENDING</button>
+            <button id="watchlist-selection" class="navButtons">MY LIBRARY</button>
+            <button id="profile-selection" class="navButtons">PROFILE</button>
+            <button id="social-selection" class="navButtons">SOCIAL</button>
+            <button id="recommendations-selection" class="navButtons">RECOMMENDATIONS</button>
+            <a href="{{ url_for('auth.logout') }}">LOGOUT</a>
+        </nav>
+    </header>
+
+
+    <main>
+        <section id="movies" class="active">
+            <div class="search-filters">
+                <div class="searchfilters">
+
+                    <!-- SEARCH -->
+                    <input type="text" id="searchMovie" placeholder="Search movies...">
+
+                    <!-- GENRES -->
+                    <div class="genre">
+                        <h3>SELECT GENRES</h3>
+                        <div class="filter-options">
+                            {% for genre in genres %}
+                                <label><input type="checkbox" name="genre" value="{{ genre.id }}">{{ genre.name }}</label>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="buttons">
+                    <button id="sbt-movies" type="button">
+                        SUBMIT
+                    </button>
+                    <button id="clr-movies" type="button">
+                        CLEAR
+                    </button>
+                </div>
+            </div>               
+            <div id="movie-container">
+            </div>
+            <div class="pagination">
+                <button class="load-more-button" id="load-more-button-movies">LOAD MORE</button>
+            </div>
+
+        </section>
+
+        <section id="tv" class="">
+            <h1>TV</h1>
+            <div class="search-filters">
+                <div class="searchfilters">
+
+                    <!-- SEARCH -->
+                    <input type="text" id="searchTV" placeholder="Search TV...">
+
+                    <!-- GENRES -->
+                    <div class="genre">
+                        <h3>SELECT GENRES</h3>
+                        <div class="filter-options">
+                            {% for genre in genresTV %}
+                                <label><input type="checkbox" name="genreTV" value="{{ genre.id }}">{{ genre.name }}</label>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="buttons">
+                    <button id="sbt-tv" type="button">
+                        SUBMIT
+                    </button>
+                    <button id="clr-tv" type="button">
+                        CLEAR
+                    </button>
+                </div>
+            </div>                   
+            <div id="tv-container">
+            </div> 
+            <div class="pagination">
+                <button class="load-more-button" id="load-more-button-tv">LOAD MORE</button>
+            </div>                      
+        </section>
+
+        <section id="trending" class="">
+            <h1>WHAT'S TRENDING</h1>
+            <nav class="navbar">
+                <button id="trending-movies" class="navButtons">TRENDING Movies</button>
+                <button id="trending-tv" class="navButtons">TRENDING TV</button>
+                <label>DAY/WEEK</label>
+                <select id="duration" name="duration">
+                    <option value = "day">TODAY</option>
+                    <option value ="week">WEEK</option>
+                </select>                   
+            </nav>            
+            <div id="trending-container-movies" class="active">
+            </div> 
+            <div id="trending-container-tv" class="">
+            </div>                      
+        </section>
+
+
+        <section id="watchlist" class="">
+            <h1>MY LIBRARY</h1>
+            <nav class="navbar">
+                <button id="library-movies" class="navButtons">Library Movies</button>
+                <button id="library-tv" class="navButtons">Library TV</button>
+            </nav> 
+            <div id="libraryContainer">          
+                <div id="library-container-movies" class="active">
+                </div>
+                <div id="library-container-tv" class="">
+                </div>
+            </div>             
+            <div id="library-pagination" class="library-pagination">
+
+            </div>
+     
+        </section>
+
+
+        <section id="profile" class="">
+
+            {% if profile %}
+
+                <div id="profile-container" class="screen-profile">
+
+                    <!-- MOVIE POSTER INTRODUCTION -->
+
+                    <div class="profile-poster">
+
+                        <p class="poster-studio">
+                            THE SILVER SCREEN CLUB PRESENTS
+                        </p>
+
+                        <p class="poster-starring">STARRING</p>
+
+                        <h1 class="poster-name">
+                            {{ user.fullname }}
+                        </h1>
+
+                        <p class="poster-username">
+                            @{{ user.username }}
+                        </p>
+
+                        <div class="poster-divider"></div>
+
+                        <h2>A LIFE IN CINEMA</h2>
+
+                        <p class="poster-tagline">
+                            Every movie tells a story.
+                            This one tells mine.
+                        </p>
+
+                        <!-- GENRES -->
+
+                        <div class="poster-genres">
+
+                            {% for genre in profile.genres or [] %}
+                                <span class="genre-tag">
+                                    {{ genre | replace('_', ' ') | upper }}
+                                </span>
+                            {% endfor %}
+
+                        </div>
+
+                        <!-- INTRODUCTION CREDITS -->
+
+                        <div class="poster-credits">
+
+                            <div>
+                                <span>THE ORIGIN STORY</span>
+                                <h3>
+                                    {{ profile.cinephile_origin or "Not revealed" }}
+                                </h3>
+                            </div>
+
+                            <div>
+                                <span>THE COMFORT CLASSIC</span>
+                                <h3>
+                                    {{ profile.comfort_watch or "Not revealed" }}
+                                </h3>
+                            </div>
+
+                        </div>
+
+                        <p class="poster-bottom">
+                            WRITTEN, DIRECTED & LIVED BY
+                            {{ user.fullname | upper }}
+                        </p>
+
+                    </div>
+
+
+                    <!-- CAST AND CREW -->
+
+                    <div class="profile-section">
+
+                        <h2>THE CAST & CREW</h2>
+
+                        <p class="section-subtitle">
+                            The people and stories behind the cinephile
+                        </p>
+
+                        <div class="profile-grid">
+
+                            <div class="profile-info-card">
+                                <span>LEADING MAN</span>
+                                <h3>{{ profile.fav_actor or "Not revealed" }}</h3>
+                            </div>
+
+                            <div class="profile-info-card">
+                                <span>LEADING LADY</span>
+                                <h3>{{ profile.fav_actress or "Not revealed" }}</h3>
+                            </div>
+
+                            <div class="profile-info-card">
+                                <span>GREATEST VILLAIN</span>
+                                <h3>{{ profile.fav_villian or "Not revealed" }}</h3>
+                            </div>
+
+                            <div class="profile-info-card">
+                                <span>FAVOURITE DIRECTOR</span>
+                                <h3>{{ profile.fav_director or "Not revealed" }}</h3>
+                            </div>
+
+                            <div class="profile-info-card">
+                                <span>THE SOUNDTRACK</span>
+                                <h3>{{ profile.soundtrack or "Not revealed" }}</h3>
+                            </div>
+
+                            <div class="profile-info-card">
+                                <span>KNOWS EVERY LINE</span>
+                                <h3>{{ profile.quote_movie or "Not revealed" }}</h3>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- THE PERSONAL MOVIE COLLECTION -->
+
+                    <div class="profile-section">
+
+                        <h2>THE PERSONAL ARCHIVES</h2>
+
+                        <p class="section-subtitle">
+                            Movies and shows that left their mark
+                        </p>
+
+                        <div class="profile-grid">
+
+                            <div class="profile-info-card">
+                                <span>WISH I COULD WATCH IT AGAIN FOR THE FIRST TIME</span>
+                                <h3>{{ profile.erase_memory or "Not revealed" }}</h3>
+                            </div>
+
+                            <div class="profile-info-card">
+                                <span>THE EMOTIONAL DAMAGE AWARD</span>
+                                <h3>{{ profile.cried or "Not revealed" }}</h3>
+                            </div>
+
+                            <div class="profile-info-card">
+                                <span>THE GREATEST PLOT TWIST</span>
+                                <h3>{{ profile.plot_twist or "Not revealed" }}</h3>
+                            </div>
+
+                            <div class="profile-info-card">
+                                <span>THE GUILTY PLEASURE</span>
+                                <h3>{{ profile.guilty_pleasure or "Not revealed" }}</h3>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- OPINIONS -->
+
+                    <div class="profile-section">
+
+                        <h2>THE CRITICS' CORNER</h2>
+
+                        <p class="section-subtitle">
+                            Unfiltered opinions from the director's chair
+                        </p>
+
+                        <div class="profile-grid">
+
+                            <div class="profile-info-card">
+                                <span>MOST OVERRATED</span>
+                                <h3>{{ profile.overrated or "Not revealed" }}</h3>
+                            </div>
+
+                            <div class="profile-info-card">
+                                <span>MOST UNDERRATED</span>
+                                <h3>{{ profile.underrated or "Not revealed" }}</h3>
+                            </div>
+
+                            <div class="profile-info-card">
+                                <span>BOOK VS MOVIE</span>
+                                <h3>
+                                    {{ (profile.book_vs_movie or "Not revealed") | replace('_', ' ') | title }}
+                                </h3>
+                            </div>
+
+                            <div class="profile-info-card">
+                                <span>WATCHING PERSONALITY</span>
+                                <h3>
+                                    {{ (profile.watch_style or "Not revealed") | replace('_', ' ') | title }}
+                                </h3>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BEHIND THE SCENES -->
+
+                    <div class="profile-section">
+
+                        <h2>BEHIND THE SCENES</h2>
+
+                        <p class="section-subtitle">
+                            How the movie magic happens
+                        </p>
+
+                        <div class="profile-grid">
+
+                            <div class="profile-info-card">
+                                <span>SUBTITLE PREFERENCE</span>
+                                <h3>
+                                    {{ (profile.subtitles or "Not revealed") | replace('_', ' ') | title }}
+                                </h3>
+                            </div>
+
+                            <div class="profile-info-card">
+                                <span>FAVOURITE SEAT</span>
+                                <h3>
+                                    {{ (profile.theatre_seat or "Not revealed") | replace('_', ' ') | title }}
+                                </h3>
+                            </div>
+
+                            <div class="profile-info-card">
+                                <span>MOVIE SNACK</span>
+                                <h3>
+                                    {{ (profile.snack or "Not revealed") | replace('_', ' ') | title }}
+                                </h3>
+                            </div>
+
+                            <div class="profile-info-card">
+
+                                <span>SPOILER TOLERANCE</span>
+
+                                <h3>
+                                    {{ profile.spoiler_tolerance or 0 }}/10
+                                </h3>
+
+                                <progress
+                                    class="spoiler-progress"
+                                    value="{{ profile.spoiler_tolerance or 0 }}"
+                                    max="10">
+                                </progress>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FINAL RECOMMENDATION -->
+
+                    <div class="profile-finale">
+
+                        <p>A RECOMMENDATION FROM THE MAIN CHARACTER</p>
+
+                        <h2>ONE YOU SHOULDN'T MISS</h2>
+
+                        <blockquote>
+                            {{ profile.recommend or "The recommendation is still unwritten." }}
+                        </blockquote>
+
+                        <div class="final-credits">
+                            <p>THE END... OR JUST THE BEGINNING?</p>
+                            <span>THE SILVER SCREEN CLUB</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% else %}
+
+                <div class="profile-empty">
+
+                    <h2>YOUR STORY HASN'T STARTED YET</h2>
+
+                    <p>
+                        Every cinephile deserves an opening scene.
+                        Create your screen profile to begin.
+                    </p>
+
+                    <a href="{{ url_for('auth.createProfile') }}">
+                        EDIT MY SCREEN PROFILE
+                    </a>
+
+                </div>
+
+            {% endif %}
+        </section>
+
+
+        <section id="social" class="">
+            <nav class="navbar">
+                <button id="search-users" class="navButtons">SEARCH</button>
+                <button id="view-connection-requests" class="navButtons">CONNECTION REQUESTS</button>                 
+            </nav>
+            <div id="search-section" class="active">
+                <h1>FIND CINEFILES AND TV BUDDIES</h1>
+                <div class="search-filters">
+                    <div class="searchfilters">
+                        <!-- SEARCH -->
+                        <input type="text" id="search" placeholder="Search ...">
+                    </div>
+                    <div id="suggestions" class="suggestions">
+
+                    </div>
+                </div>          
+            </div>
+            <div id="connections-requests" class="">
+                <h1>NOTIFICATIONS</h1>
+                <div id="notification-Container" class="notification-Container">
+
+
+                </div>
+            </div>
+            <div class="profile-modals" id="profile-modals">
+
+                <div id="social-profile-content"></div>
+
+            </div>
+        </section>        
+
+
+        <section id="recommendations" class="">
+            <nav class="navbar">
+                <button id="recommend-sent" class="navButtons">RECOMMENDATIONS SENT</button>
+                <button id="recommend-receive" class="navButtons">RECOMMENDATIONS RECEIVED</button>
+            </nav>
+            <div id="recommendations-container" class="recommendations">
+
+                <div id="recommendations-sent" class="active">
+                    <h1>RECOMMENDATIONS SENT</h1>
+                    <div class="recommendations-container" id="recommendations-sent-container">
+
+                    </div>
+
+                </div>
+
+                <div id="recommendations-received" class="">
+                    <h1>RECOMMENDATIONS RECEIVED</h1>
+                    <div class="recommendations-container" id="recommendations-received-container">
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </section>
+
+
+        <div class="modal-overlay" id="modal">
+            <div class="modal">
+                <img id="poster">
+                <h3 id="itemTitle"></h3>
+                <h3 id="popularity"></h3>
+                <h3 id="vote_average"></h3>
+                <h4>OVERVIEW :</h4>
+                <p id="overview"></p>
+                <button id="close-modal">CLOSE</button>
+            </div>
+        </div> 
+        <div id="recommend-modal" class="modal">
+            <div id="recommend-form-container"></div>
+        </div>
+                   
+
+    </main>
+
+
+
+{% endblock %}

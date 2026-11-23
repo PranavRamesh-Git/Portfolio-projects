@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSS-CLUB {% block title %} {% endblock %}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/style.css')}}">
+    <script src="{{url_for('static',filename='/js/main.js')}}" defer></script>
+</head>
+<body>  
+  <header>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                        <button class="flash-close" type="button" aria-label="close">&times;</button>                        
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% if error_message %}
+        <p class="error">{{ error_message }}</p>
+    {% endif %}      
+    {% block header %}
+
+    {% endblock %}
+  </header>
+  {% block content %}
+  {% endblock %}
+
+
+  <footer>&copy; THE SILVER SCREEN CLUB 2026 ALL RIGHTS RESERVED</footer>
+  
+</body>
+</html>

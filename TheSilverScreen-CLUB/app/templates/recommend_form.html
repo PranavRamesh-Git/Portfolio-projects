@@ -1,0 +1,52 @@
+<div class="recommend" id="recommend">
+    <div class="recommend-modal">
+
+        <form action="{{ url_for('recommendations.sendRecommendation') }}" method="POST">
+
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="tmdb_id" value="{{ tmdb_id }}">
+            <input type="hidden" name="media_type" value="{{ media_type }}">
+            <input type="hidden" name="title" value="{{ title }}">
+            <input type="hidden" name="poster_path" value="{{ poster_path or '' }}">
+            <input type="hidden" name="release_date" value="{{ release_date or '' }}">
+            <input type="hidden" name="overview" value="{{ overview or '' }}">
+            <input type="hidden" name="popularity" value="{{ popularity if popularity is not none else '' }}">
+            <input type="hidden" name="vote_average" value="{{ vote_average if vote_average is not none else '' }}">
+            <input type="hidden" name="vote_count" value="{{ vote_count if vote_count is not none else '' }}">
+                                 
+            <label>SELECT CONNECTIONS YOU WANT TO RECOMMEND THIS TO</label>
+
+            <div>
+                <label>
+                    <input type="checkbox" name="recommend_to" value="ALL CONNECTIONS">
+                    ALL MY CONNECTIONS
+                </label>
+            </div>
+
+            {% if result %}
+                {% for connection in result %}
+                    <div>
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="recommend_to"
+                                value="{{ connection.user_id }}"
+                            >
+                            {{ connection.fullname }}
+                        </label>
+                    </div>
+                {% endfor %}
+                <div>
+                    <button type="submit" id="send-recommendation">
+                        SEND RECOMMENDATION
+                    </button>
+                </div>
+            {% endif %}
+
+        </form>
+        <div>
+            <button type="button" id="close-exit-form">CLOSE</button>
+        </div>
+
+    </div>
+</div>

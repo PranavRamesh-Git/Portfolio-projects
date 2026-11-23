@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% block header %}
+    <nav class="navbar">
+        <button class="navButtons" id="explore-button">EXPLORE</button>
+        <button class="navButtons" id="wishlist-button">WISHLIST</button>
+        <button class="navButtons" id="cartButton">VIEW CART</button>
+        <button class="navButtons" id="historyButton">ORDERS</button>
+        <button class="navButtons" id="outStockButton">OUT OF STOCK</button>
+        <button class="navButtons" id="expiredButton">EXPIRED</button>
+        <form action="{{ url_for('auth.logout') }}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit">LOGOUT</button>
+        </form>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <section id="discover-section" class="pagesection active">
+
+        <div class="searchFilters">
+
+            <div class="search">    
+                <input id="search" name="search" placeholder="SEARCH PRODUCTS, BRANDS OR CATEGORIES..." type="text">
+            </div>
+
+            <div class="filters">
+
+                <div class="filter-dropdown">
+                    <button id="brands-dropdownButton" class="buttons" type="button">SELECT BRANDS</button>
+
+                    <div id="brands-dropdown" class="hidden">  
+                        {% for brand in brands %}
+                            <label>
+                                <input type="checkbox" name="brands" value="{{ brand.name }}"> {{ brand.name }}
+                            </label>
+                        {% endfor %}
+                    </div>  
+                </div>
+
+                <div class="filter-dropdown">
+                    <button id="catagories-dropdownButton" class="buttons" type="button">CHOOSE CATEGORIES</button>
+
+                    <div id="catagories-dropdown" class="hidden">
+                        {% for catagory in categories %}
+                            <label>
+                                <input type="checkbox" name="categories" value="{{ catagory.slug }}"> {{ catagory.slug }}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div>
+                    <select name="orderby" id="orderby">
+                        <option value="">ORDER BY</option>
+                        <option value="avg_rating">
+                            AVG RATING HIGH TO LOW
+                        </option>
+                        <option value="price">
+                            PRICE LOW TO HIGH
+                        </option>
+
+                        <option value="discount_percent">
+                            DISCOUNT HIGH TO LOW
+                        </option>
+                    </select>
+                </div>
+
+                <div class="applySearch">
+                    <button id="submit" type="button">SUBMIT</button>
+                    <button id="clear" type="button">CLEAR</button>
+                </div>                
+
+            </div>
+
+        </div>
+
+        <h1>EXPLORE</h1>
+
+        <div class="products-container" id="productscontainer">
+        </div>
+
+        <div class="pagination">
+            <button id="load-more" type="button">LOAD MORE</button>
+        </div>
+
+    </section>
+
+    <section id="wishlist-section" class="pagesection">
+
+        <h1>ON WISHLIST</h1>
+
+        <div class="products-container" id="wishlist-container">
+        </div>
+
+
+    </section>
+
+    <section id="cart-section" class="pagesection">
+
+        <h1>MY CART</h1>
+        
+        <div class="cart-container" id="cart-container">
+        </div>
+
+    </section>
+
+    <section id="history-section" class="pagesection">
+
+        <h1>ORDERS</h1>
+        <div class="order-container" id="order-container">
+        </div>
+
+    </section>
+
+    <section id="outofStock-section" class="pagesection">
+
+        <h1>OUT OF STOCK</h1>
+
+
+        <div class="products-container" id="outofStock-container">
+        </div>
+
+        <div class="pagination">
+            <button id="load-more-outStock" type="button">LOAD MORE</button>
+        </div>        
+
+    </section>
+
+
+    <section id="expired-section" class="pagesection">
+
+        <h1>EXPIRED PRODUCTS</h1>
+
+        <div class="products-container" id="expired-container">
+        </div>
+
+        <div class="pagination">
+            <button id="load-more-expired" type="button">LOAD MORE</button>
+        </div>        
+
+    </section>
+
+
+    <div class="view-modal" id="view-modal">
+        <div class="modal-content" id="modal-content">
+        </div>
+    </div> 
+    
+
+{% endblock %}
+{% block scripts %}
+    <script
+        type="module" src="{{ url_for('static', filename='js/main1.js') }}">
+    </script>
+{% endblock %}

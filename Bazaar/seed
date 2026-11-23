@@ -1,0 +1,422 @@
+/*
+Database Setup
+
+Bazaar uses PostgreSQL for product inventory, user accounts, shopping carts, wishlists, reviews, and order processing.
+
+1. Create the database
+
+createdb bazaar
+
+2. Create tables, views, and triggers
+
+psql -d bazaar -f database/schema.sql
+
+3. Populate the database with sample data
+
+psql -v ON_ERROR_STOP=1 -d bazaar -f database/seed.sql
+*/
+BEGIN;
+
+-- ---------------------------------------------------------------------
+-- Categories
+-- ---------------------------------------------------------------------
+INSERT INTO categories (name, slug) VALUES
+    ('Fruits & Vegetables',      'fruits-vegetables'),
+    ('Dairy & Eggs',             'dairy-eggs'),
+    ('Bakery & Biscuits',        'bakery'),
+    ('Meat & Seafood',           'meat-seafood'),
+    ('Rice, Atta & Dals',        'staples'),
+    ('Oils & Ghee',              'oils-ghee'),
+    ('Spices & Masalas',         'spices'),
+    ('Snacks & Namkeen',         'snacks'),
+    ('Beverages',                'beverages'),
+    ('Breakfast & Spreads',      'breakfast'),
+    ('Chocolates & Sweets',      'chocolates-sweets'),
+    ('Frozen Foods',             'frozen'),
+    ('Personal Care',            'personal-care'),
+    ('Baby Care',                'baby-care'),
+    ('Household Cleaning',       'household-cleaning'),
+    ('Kitchenware',              'kitchenware'),
+    ('Home Storage',             'home-storage'),
+    ('Electricals',              'electricals'),
+    ('Stationery',               'stationery'),
+    ('Pet Care',                 'pet-care');
+
+
+-- Brands
+
+INSERT INTO brands (name) VALUES
+    ('FreshFarm'), ('Amul'), ('Mother Dairy'), ('Epigamia'), ('Britannia'), ('Parle'),
+    ('Sunfeast'), ('Modern'), ('Venky''s'), ('Aashirvaad'), ('India Gate'), ('Daawat'),
+    ('Tata Sampann'), ('Tata Salt'), ('Madhur'), ('Rajdhani'), ('Fortune'), ('Saffola'),
+    ('Figaro'), ('MDH'), ('Everest'), ('Catch'), ('Lay''s'), ('Kurkure'), ('Haldiram''s'),
+    ('Bingo'), ('Pringles'), ('Act II'), ('Tata Tea'), ('Red Label'), ('Bru'), ('Nescafé'),
+    ('Real'), ('Paper Boat'), ('Coca-Cola'), ('Bisleri'), ('Tropicana'), ('Cadbury'),
+    ('Horlicks'), ('Thums Up'), ('Red Bull'), ('Maggi'), ('Kellogg''s'), ('MTR'), ('Kissan'),
+    ('Dabur'), ('Quaker'), ('Veeba'), ('Pintola'), ('Nestlé'), ('Ferrero Rocher'),
+    ('McCain'), ('Sumeru'), ('Kwality Wall''s'), ('Colgate'), ('Dove'), ('Dettol'), ('Nivea'),
+    ('Head & Shoulders'), ('Gillette'), ('Vaseline'), ('Himalaya'), ('Oral-B'), ('Whisper'),
+    ('Pampers'), ('Huggies'), ('Johnson''s'), ('Surf Excel'), ('Vim'), ('Harpic'), ('Lizol'),
+    ('Ariel'), ('Comfort'), ('Colin'), ('Scotch-Brite'), ('Good Knight'), ('Hit'), ('Odonil'),
+    ('Origami'), ('Ezee'), ('Prestige'), ('Pigeon'), ('Milton'), ('Borosil'), ('Cello'),
+    ('Tupperware'), ('Philips'), ('Havells'), ('Duracell'), ('Eveready'), ('Syska'),
+    ('Classmate'), ('Reynolds'), ('Camlin'), ('Faber-Castell'), ('Fevicol'), ('Doms'),
+    ('Pedigree'), ('Whiskas'), ('Drools');
+
+
+-- Products
+-- shelf_life = days from manufacture to expiry (NULL = no expiry)
+
+INSERT INTO products (sku, name, brand_id, category_id, unit_size, unit,
+                      price, discount_percent, quantity, shelf_life_days)
+SELECT v.sku, v.name, b.id, c.id, v.unit_size, v.unit,
+       v.price, v.discount_percent, v.quantity, v.shelf_life
+FROM (VALUES
+    -- sku,      name,                                          brand,              category,             size,  unit,  price, disc, qty, shelf_life
+    -- Fruits & Vegetables
+    ('FV-001', 'Banana Robusta',                               'FreshFarm',        'fruits-vegetables',     1, 'kg',     60,  10, 120,    6),
+    ('FV-002', 'Onion',                                        'FreshFarm',        'fruits-vegetables',     1, 'kg',     45,   0, 300,   30),
+    ('FV-003', 'Tomato',                                       'FreshFarm',        'fruits-vegetables',     1, 'kg',     40,   5, 220,    7),
+    ('FV-004', 'Potato',                                       'FreshFarm',        'fruits-vegetables',     1, 'kg',     38,   0, 350,   45),
+    ('FV-005', 'Apple Shimla',                                 'FreshFarm',        'fruits-vegetables',     1, 'kg',    220,  15,  80,   25),
+    ('FV-006', 'Carrot',                                       'FreshFarm',        'fruits-vegetables',   500, 'g',      35,   0, 140,   10),
+    ('FV-007', 'Coriander Leaves',                             'FreshFarm',        'fruits-vegetables',   100, 'g',      15,   0,  90,    3),
+    ('FV-008', 'Lemon',                                        'FreshFarm',        'fruits-vegetables',     6, 'pcs',    30,   0, 150,   14),
+    ('FV-009', 'Pomegranate',                                  'FreshFarm',        'fruits-vegetables',     1, 'kg',    240,  20,  60,   20),
+    ('FV-010', 'Spinach',                                      'FreshFarm',        'fruits-vegetables',   250, 'g',      25,   0,  70,    3),
+    ('FV-011', 'Green Capsicum',                               'FreshFarm',        'fruits-vegetables',   500, 'g',      50,  10,  85,    8),
+    ('FV-012', 'Mango Alphonso',                               'FreshFarm',        'fruits-vegetables',     1, 'kg',    450,  25,  40,    7),
+    -- Dairy & Eggs
+    ('DE-001', 'Amul Taaza Toned Milk',                        'Amul',             'dairy-eggs',          500, 'ml',     28,   0, 200,    3),
+    ('DE-002', 'Amul Butter Salted',                           'Amul',             'dairy-eggs',          100, 'g',      60,   5, 150,  180),
+    ('DE-003', 'Amul Cheese Slices',                           'Amul',             'dairy-eggs',          200, 'g',     155,  10,  90,  270),
+    ('DE-004', 'Mother Dairy Classic Dahi',                    'Mother Dairy',     'dairy-eggs',          400, 'g',      50,   0, 110,   15),
+    ('DE-005', 'Amul Fresh Paneer',                            'Amul',             'dairy-eggs',          200, 'g',      95,   5,  70,   10),
+    ('DE-006', 'Epigamia Greek Yogurt Blueberry',              'Epigamia',         'dairy-eggs',           90, 'g',      60,  20,  50,   30),
+    ('DE-007', 'Farm Fresh Eggs',                              'FreshFarm',        'dairy-eggs',            6, 'pcs',    48,   0, 160,   21),
+    ('DE-008', 'Amul Masti Buttermilk',                        'Amul',             'dairy-eggs',          200, 'ml',     15,   0, 180,    5),
+    ('DE-009', 'Mother Dairy Full Cream Milk',                 'Mother Dairy',     'dairy-eggs',            1, 'l',      68,   0, 120,    3),
+    ('DE-010', 'Amul Fresh Cream',                             'Amul',             'dairy-eggs',          250, 'ml',     70,  10,  60,   90),
+    -- Bakery & Biscuits
+    ('BK-001', 'Britannia Whole Wheat Bread',                  'Britannia',        'bakery',              400, 'g',      55,   0,  60,    5),
+    ('BK-002', 'Britannia Good Day Cashew',                    'Britannia',        'bakery',              200, 'g',      45,  10, 200,  180),
+    ('BK-003', 'Parle-G Glucose Biscuits',                     'Parle',            'bakery',              800, 'g',      90,   5, 180,  270),
+    ('BK-004', 'Britannia Marie Gold',                         'Britannia',        'bakery',              250, 'g',      40,   0, 160,  240),
+    ('BK-005', 'Britannia Fruit Cake',                         'Britannia',        'bakery',              125, 'g',      40,  15,  75,   60),
+    ('BK-006', 'Parle Monaco Classic',                         'Parle',            'bakery',              200, 'g',      40,   5, 140,  210),
+    ('BK-007', 'Sunfeast Dark Fantasy Choco Fills',            'Sunfeast',         'bakery',              300, 'g',     180,  20,  90,  180),
+    ('BK-008', 'Britannia Bourbon',                            'Britannia',        'bakery',              150, 'g',      35,   0, 130,  240),
+    ('BK-009', 'Modern Sandwich Bread',                        'Modern',           'bakery',              400, 'g',      50,   0,  50,    5),
+    -- Meat & Seafood
+    ('MS-001', 'Chicken Curry Cut',                            'FreshFarm',        'meat-seafood',        500, 'g',     180,  10,  40,    2),
+    ('MS-002', 'Chicken Breast Boneless',                      'FreshFarm',        'meat-seafood',        450, 'g',     240,  15,  35,    2),
+    ('MS-003', 'Mutton Curry Cut',                             'FreshFarm',        'meat-seafood',        500, 'g',     450,   0,  20,    2),
+    ('MS-004', 'Seer Fish Steaks',                             'FreshFarm',        'meat-seafood',        500, 'g',     520,  10,  15,    2),
+    ('MS-005', 'Prawns Medium Cleaned',                        'FreshFarm',        'meat-seafood',        250, 'g',     320,  20,  25,    2),
+    ('MS-006', 'Rohu Fish Curry Cut',                          'FreshFarm',        'meat-seafood',        500, 'g',     190,   0,  30,    2),
+    ('MS-007', 'Venky''s Chicken Sausages',                    'Venky''s',         'meat-seafood',        250, 'g',     160,  10,  45,  180),
+    -- Rice, Atta & Dals
+    ('ST-001', 'Aashirvaad Shudh Chakki Atta',                 'Aashirvaad',       'staples',               5, 'kg',    310,   8, 100,  120),
+    ('ST-002', 'India Gate Basmati Rice Classic',              'India Gate',       'staples',               1, 'kg',    210,  10, 120,  540),
+    ('ST-003', 'Daawat Rozana Basmati Rice',                   'Daawat',           'staples',               5, 'kg',    520,  12,  60,  540),
+    ('ST-004', 'Tata Sampann Toor Dal',                        'Tata Sampann',     'staples',               1, 'kg',    205,   8, 110,  270),
+    ('ST-005', 'Tata Sampann Moong Dal',                       'Tata Sampann',     'staples',             500, 'g',      95,   5,  90,  270),
+    ('ST-006', 'Tata Salt Iodised',                            'Tata Salt',        'staples',               1, 'kg',     28,   0, 250,  730),
+    ('ST-007', 'Madhur Pure Sugar',                            'Madhur',           'staples',               1, 'kg',     55,   5, 200,  730),
+    ('ST-008', 'Tata Sampann Chana Dal',                       'Tata Sampann',     'staples',               1, 'kg',    130,  10,  80,  270),
+    ('ST-009', 'Sona Masoori Rice',                            'FreshFarm',        'staples',               5, 'kg',    380,  10,  70,  365),
+    ('ST-010', 'Aashirvaad Multigrain Atta',                   'Aashirvaad',       'staples',               5, 'kg',    360,  15,  50,  120),
+    ('ST-011', 'Rajdhani Besan',                               'Rajdhani',         'staples',             500, 'g',      70,   5,  90,  180),
+    ('ST-012', 'Tata Sampann Rajma',                           'Tata Sampann',     'staples',             500, 'g',     110,   0,  60,  365),
+    -- Oils & Ghee
+    ('OG-001', 'Fortune Sunflower Oil',                        'Fortune',          'oils-ghee',             1, 'l',     175,  10, 140,  270),
+    ('OG-002', 'Saffola Gold Edible Oil',                      'Saffola',          'oils-ghee',             1, 'l',     205,  12, 100,  270),
+    ('OG-003', 'Fortune Kachi Ghani Mustard Oil',              'Fortune',          'oils-ghee',             1, 'l',     185,   8,  80,  270),
+    ('OG-004', 'Amul Pure Ghee',                               'Amul',             'oils-ghee',             1, 'l',     650,   5,  70,  270),
+    ('OG-005', 'Fortune Rice Bran Oil',                        'Fortune',          'oils-ghee',             1, 'l',     170,  10,  90,  270),
+    ('OG-006', 'Figaro Extra Virgin Olive Oil',                'Figaro',           'oils-ghee',           500, 'ml',    650,  20,  30,  540),
+    -- Spices & Masalas
+    ('SP-001', 'MDH Garam Masala',                             'MDH',              'spices',              100, 'g',      92,   5, 120,  365),
+    ('SP-002', 'Everest Turmeric Powder',                      'Everest',          'spices',              200, 'g',      76,   0, 140,  365),
+    ('SP-003', 'Everest Kashmirilal Chilli Powder',            'Everest',          'spices',              100, 'g',      98,  10, 100,  365),
+    ('SP-004', 'MDH Chana Masala',                             'MDH',              'spices',              100, 'g',      85,   5,  90,  365),
+    ('SP-005', 'Tata Sampann Coriander Powder',                'Tata Sampann',     'spices',              200, 'g',      70,   0, 110,  365),
+    ('SP-006', 'Everest Sambhar Masala',                       'Everest',          'spices',              100, 'g',      82,  10, 120,  365),
+    ('SP-007', 'Catch Black Pepper Powder',                    'Catch',            'spices',              100, 'g',     120,   5,  80,  540),
+    ('SP-008', 'Everest Kitchen King Masala',                  'Everest',          'spices',              100, 'g',      80,   0,  70,  365),
+    ('SP-009', 'MDH Kasoori Methi',                            'MDH',              'spices',               25, 'g',      40,   0,  90,  365),
+    ('SP-010', 'Catch Jeera Whole',                            'Catch',            'spices',              100, 'g',      95,  10,  75,  540),
+    -- Snacks & Namkeen
+    ('SN-001', 'Lay''s Classic Salted',                        'Lay''s',           'snacks',               52, 'g',      20,   0, 300,  120),
+    ('SN-002', 'Lay''s India''s Magic Masala',                 'Lay''s',           'snacks',              115, 'g',      50,  10, 150,  120),
+    ('SN-003', 'Kurkure Masala Munch',                         'Kurkure',          'snacks',               90, 'g',      20,   0, 260,  120),
+    ('SN-004', 'Haldiram''s Aloo Bhujia',                      'Haldiram''s',      'snacks',              400, 'g',     115,  15, 100,  180),
+    ('SN-005', 'Haldiram''s Moong Dal',                        'Haldiram''s',      'snacks',              200, 'g',      60,  10, 120,  180),
+    ('SN-006', 'Haldiram''s Navrattan Mix',                    'Haldiram''s',      'snacks',              350, 'g',     110,  15,  90,  180),
+    ('SN-007', 'Bingo Mad Angles Achaari Masti',               'Bingo',            'snacks',               66, 'g',      20,   0, 200,  150),
+    ('SN-008', 'Pringles Original',                            'Pringles',         'snacks',              107, 'g',     115,  10,  80,  365),
+    ('SN-009', 'Act II Classic Salted Popcorn',                'Act II',           'snacks',               90, 'g',      45,   5, 100,  270),
+    ('SN-010', 'Haldiram''s Khatta Meetha',                    'Haldiram''s',      'snacks',              200, 'g',      55,   5, 100,  180),
+    -- Beverages
+    ('BV-001', 'Tata Tea Premium',                             'Tata Tea',         'beverages',           500, 'g',     290,  10, 130,  540),
+    ('BV-002', 'Red Label Tea',                                'Red Label',        'beverages',           500, 'g',     300,  12, 110,  540),
+    ('BV-003', 'Bru Instant Coffee',                           'Bru',              'beverages',           100, 'g',     320,  10,  90,  540),
+    ('BV-004', 'Nescafé Classic Instant Coffee',               'Nescafé',          'beverages',            90, 'g',     390,  15,  80,  540),
+    ('BV-005', 'Real Fruit Power Mixed Fruit Juice',           'Real',             'beverages',             1, 'l',     130,  10, 100,  240),
+    ('BV-006', 'Paper Boat Aamras',                            'Paper Boat',       'beverages',           250, 'ml',     40,   0, 150,  180),
+    ('BV-007', 'Coca-Cola',                                    'Coca-Cola',        'beverages',           750, 'ml',     40,   0, 200,  180),
+    ('BV-008', 'Bisleri Mineral Water',                        'Bisleri',          'beverages',             1, 'l',      20,   0, 400,  365),
+    ('BV-009', 'Tropicana Orange Juice',                       'Tropicana',        'beverages',             1, 'l',     140,  15,  80,  240),
+    ('BV-010', 'Cadbury Bournvita',                            'Cadbury',          'beverages',           500, 'g',     250,  10,  90,  365),
+    ('BV-011', 'Horlicks Classic Malt',                        'Horlicks',         'beverages',           500, 'g',     260,   8,  80,  365),
+    ('BV-012', 'Thums Up',                                     'Thums Up',         'beverages',           750, 'ml',     40,   0, 180,  180),
+    ('BV-013', 'Red Bull Energy Drink',                        'Red Bull',         'beverages',           250, 'ml',    125,   0, 100,  540),
+    -- Breakfast & Spreads
+    ('BI-001', 'Maggi 2-Minute Masala Noodles (4-pack)',       'Maggi',            'breakfast',           280, 'g',      60,   5, 250,  270),
+    ('BI-002', 'Kellogg''s Corn Flakes Original',              'Kellogg''s',       'breakfast',           475, 'g',     210,  15,  80,  300),
+    ('BI-003', 'Kellogg''s Chocos',                            'Kellogg''s',       'breakfast',           375, 'g',     230,  20,  70,  300),
+    ('BI-004', 'MTR Rava Idli Mix',                            'MTR',              'breakfast',           500, 'g',     145,  10,  60,  180),
+    ('BI-005', 'MTR Gulab Jamun Mix',                          'MTR',              'breakfast',           175, 'g',     125,  10,  70,  270),
+    ('BI-006', 'Kissan Mixed Fruit Jam',                       'Kissan',           'breakfast',           500, 'g',     175,  10,  80,  365),
+    ('BI-007', 'Dabur Honey',                                  'Dabur',            'breakfast',           500, 'g',     245,  20,  90,  730),
+    ('BI-008', 'Quaker Oats',                                  'Quaker',           'breakfast',             1, 'kg',    199,  15,  85,  365),
+    ('BI-009', 'Saffola Masala Oats Classic',                  'Saffola',          'breakfast',           500, 'g',     185,  10,  70,  270),
+    ('BI-010', 'Sunfeast YiPPee Magic Masala Noodles',         'Sunfeast',         'breakfast',           240, 'g',      55,   5, 120,  270),
+    ('BI-011', 'Kissan Fresh Tomato Ketchup',                  'Kissan',           'breakfast',           950, 'g',     150,  10,  90,  365),
+    ('BI-012', 'Veeba Eggless Mayonnaise',                     'Veeba',            'breakfast',           250, 'g',      99,   5,  60,  240),
+    ('BI-013', 'Pintola Classic Peanut Butter Crunchy',        'Pintola',          'breakfast',           350, 'g',     225,  20,  50,  365),
+    -- Chocolates & Sweets
+    ('CH-001', 'Cadbury Dairy Milk Silk',                      'Cadbury',          'chocolates-sweets',    60, 'g',      95,   0, 150,  300),
+    ('CH-002', 'Cadbury 5 Star',                               'Cadbury',          'chocolates-sweets',    40, 'g',      20,   0, 250,  300),
+    ('CH-003', 'Cadbury Bournville Dark',                      'Cadbury',          'chocolates-sweets',    80, 'g',     120,  10,  70,  365),
+    ('CH-004', 'Haldiram''s Rasgulla',                         'Haldiram''s',      'chocolates-sweets',     1, 'kg',    230,  10,  50,  365),
+    ('CH-005', 'Nestlé KitKat',                                'Nestlé',           'chocolates-sweets',  37.3, 'g',      30,   0, 200,  300),
+    ('CH-006', 'Ferrero Rocher (16 pcs)',                      'Ferrero Rocher',   'chocolates-sweets',   200, 'g',     650,  10,  30,  365),
+    ('CH-007', 'Cadbury Celebrations Assorted',                'Cadbury',          'chocolates-sweets',   196, 'g',     250,  15,  40,  270),
+    ('CH-008', 'Haldiram''s Soan Papdi',                       'Haldiram''s',      'chocolates-sweets',   500, 'g',     150,  20,  60,  180),
+    ('CH-009', 'Amul Dark Chocolate',                          'Amul',             'chocolates-sweets',   150, 'g',     200,  10,  50,  365),
+    -- Frozen Foods
+    ('FZ-001', 'McCain French Fries',                          'McCain',           'frozen',              420, 'g',     140,  10,  70,  365),
+    ('FZ-002', 'McCain Aloo Tikki',                            'McCain',           'frozen',              400, 'g',     135,  10,  60,  365),
+    ('FZ-003', 'Sumeru Frozen Green Peas',                     'Sumeru',           'frozen',              500, 'g',     110,  15,  90,  365),
+    ('FZ-004', 'Amul Vanilla Magic Ice Cream',                 'Amul',             'frozen',                1, 'l',     210,   5,  40,  180),
+    ('FZ-005', 'Sumeru Malabar Paratha',                       'Sumeru',           'frozen',              400, 'g',     125,  10,  50,  180),
+    ('FZ-006', 'Kwality Wall''s Cornetto Double Chocolate',    'Kwality Wall''s',  'frozen',              105, 'ml',     60,   0,  80,  180),
+    ('FZ-007', 'Venky''s Chicken Nuggets',                     'Venky''s',         'frozen',              400, 'g',     260,  15,  40,  270),
+    -- Personal Care
+    ('PC-001', 'Colgate Strong Teeth Toothpaste',              'Colgate',          'personal-care',       200, 'g',     115,   5, 150,  730),
+    ('PC-002', 'Colgate MaxFresh Gel',                         'Colgate',          'personal-care',       150, 'g',     110,  10, 130,  730),
+    ('PC-003', 'Dove Cream Beauty Bathing Bar (3x100g)',       'Dove',             'personal-care',       300, 'g',     210,  15, 100, 1095),
+    ('PC-004', 'Dettol Original Soap (4x75g)',                 'Dettol',           'personal-care',       300, 'g',     185,  10, 120, 1095),
+    ('PC-005', 'Dove Hair Fall Rescue Shampoo',                'Dove',             'personal-care',       340, 'ml',    390,  20,  70, 1095),
+    ('PC-006', 'Dettol Antiseptic Liquid',                     'Dettol',           'personal-care',       250, 'ml',    175,   5,  90, 1095),
+    ('PC-007', 'Nivea Soft Moisturising Cream',                'Nivea',            'personal-care',       100, 'ml',    199,  10,  80, 1095),
+    ('PC-008', 'Head & Shoulders Anti Dandruff Shampoo',       'Head & Shoulders', 'personal-care',       340, 'ml',    399,  15,  60, 1095),
+    ('PC-009', 'Gillette Mach3 Razor',                         'Gillette',         'personal-care',         1, 'pcs',   299,  10,  40, NULL),
+    ('PC-010', 'Vaseline Intensive Care Body Lotion',          'Vaseline',         'personal-care',       400, 'ml',    375,  20,  55, 1095),
+    ('PC-011', 'Himalaya Neem Face Wash',                      'Himalaya',         'personal-care',       150, 'ml',    199,  10,  90, 1095),
+    ('PC-012', 'Oral-B Pro Toothbrush Medium (3-pack)',        'Oral-B',           'personal-care',         3, 'pcs',   150,  15,  70, NULL),
+    ('PC-013', 'Whisper Ultra Clean XL+',                      'Whisper',          'personal-care',        30, 'pcs',   375,  10,  60, 1095),
+    -- Baby Care
+    ('BC-001', 'Pampers Pants Medium',                         'Pampers',          'baby-care',            76, 'pcs',  1299,  25,  30, 1095),
+    ('BC-002', 'Huggies Wonder Pants Large',                   'Huggies',          'baby-care',            64, 'pcs',  1199,  20,  30, 1095),
+    ('BC-003', 'Johnson''s Baby Powder',                       'Johnson''s',       'baby-care',           400, 'g',     305,  10,  50, 1095),
+    ('BC-004', 'Johnson''s Baby Shampoo',                      'Johnson''s',       'baby-care',           200, 'ml',    199,   5,  45, 1095),
+    ('BC-005', 'Himalaya Baby Lotion',                         'Himalaya',         'baby-care',           400, 'ml',    340,  10,  40, 1095),
+    ('BC-006', 'Nestlé Cerelac Wheat Apple',                   'Nestlé',           'baby-care',           300, 'g',     290,   0,  35,  270),
+    ('BC-007', 'Himalaya Gentle Baby Wipes',                   'Himalaya',         'baby-care',            72, 'pcs',   199,  15,  60,  730),
+    -- Household Cleaning
+    ('HC-001', 'Surf Excel Easy Wash Detergent Powder',        'Surf Excel',       'household-cleaning',    1, 'kg',    155,   5, 120,  730),
+    ('HC-002', 'Surf Excel Matic Liquid Front Load',           'Surf Excel',       'household-cleaning',    1, 'l',     245,  15,  80,  730),
+    ('HC-003', 'Vim Dishwash Liquid Lemon',                    'Vim',              'household-cleaning',  500, 'ml',    120,  10, 100,  730),
+    ('HC-004', 'Harpic Power Plus Toilet Cleaner',             'Harpic',           'household-cleaning',    1, 'l',     220,  10,  90,  730),
+    ('HC-005', 'Lizol Floral Floor Cleaner',                   'Lizol',            'household-cleaning',  975, 'ml',    235,  15,  80,  730),
+    ('HC-006', 'Vim Dishwash Bar',                             'Vim',              'household-cleaning',  300, 'g',      30,   0, 200,  730),
+    ('HC-007', 'Ariel Matic Top Load Detergent Powder',        'Ariel',            'household-cleaning',    2, 'kg',    599,  20,  50,  730),
+    ('HC-008', 'Comfort After Wash Fabric Conditioner',        'Comfort',          'household-cleaning',  860, 'ml',    245,  10,  60,  730),
+    ('HC-009', 'Colin Glass Cleaner',                          'Colin',            'household-cleaning',  500, 'ml',    115,   5,  70,  730),
+    ('HC-010', 'Scotch-Brite Scrub Pad (3-pack)',              'Scotch-Brite',     'household-cleaning',    3, 'pcs',    60,   0, 150, NULL),
+    ('HC-011', 'Good Knight Gold Flash Refill',                'Good Knight',      'household-cleaning',   45, 'ml',     85,   0, 120,  730),
+    ('HC-012', 'Hit Cockroach Killer Spray',                   'Hit',              'household-cleaning',  400, 'ml',    249,  10,  50,  730),
+    ('HC-013', 'Odonil Air Freshener Blocks (4-pack)',         'Odonil',           'household-cleaning',  200, 'g',     220,  15,  70,  730),
+    ('HC-014', 'Origami Kitchen Towels (2 rolls)',             'Origami',          'household-cleaning',    2, 'pcs',   140,  10,  80, NULL),
+    ('HC-015', 'Ezee Garbage Bags Medium',                     'Ezee',             'household-cleaning',   30, 'pcs',    99,   0, 100, NULL),
+    -- Kitchenware
+    ('KW-001', 'Prestige Popular Pressure Cooker',             'Prestige',         'kitchenware',           3, 'l',    1650,  25,  15, NULL),
+    ('KW-002', 'Pigeon Non-Stick Fry Pan 24cm',                'Pigeon',           'kitchenware',           1, 'pcs',   899,  30,  20, NULL),
+    ('KW-003', 'Milton Thermosteel Flask',                     'Milton',           'kitchenware',           1, 'l',    1099,  20,  25, NULL),
+    ('KW-004', 'Borosil Glass Mixing Bowl Set',                'Borosil',          'kitchenware',           3, 'pcs',  1299,  15,  12, NULL),
+    ('KW-005', 'Prestige Omega Deluxe Granite Tawa 28cm',      'Prestige',         'kitchenware',           1, 'pcs',  1395,  25,  10, NULL),
+    ('KW-006', 'Pigeon Stainless Steel Knife Set',             'Pigeon',           'kitchenware',           3, 'pcs',   299,  10,  40, NULL),
+    ('KW-007', 'Cello Opalware Dinner Set',                    'Cello',            'kitchenware',          18, 'pcs',  2499,  30,   8, NULL),
+    ('KW-008', 'Borosil Vision Glass Tumblers',                'Borosil',          'kitchenware',           6, 'pcs',   450,  10,  30, NULL),
+    ('KW-009', 'Prestige Electric Kettle',                     'Prestige',         'kitchenware',         1.5, 'l',    1295,  20,  18, NULL),
+    ('KW-010', 'Milton Steel Water Bottle',                    'Milton',           'kitchenware',           1, 'l',     549,  15,  45, NULL),
+    -- Home Storage
+    ('HS-001', 'Tupperware Classic Sheer Container Set',       'Tupperware',       'home-storage',          3, 'pcs',   999,  15,  20, NULL),
+    ('HS-002', 'Cello Checkers Storage Jar Set',               'Cello',            'home-storage',          6, 'pcs',   599,  25,  30, NULL),
+    ('HS-003', 'Milton Steel Lunch Box (3-tier)',              'Milton',           'home-storage',          3, 'pcs',   799,  15,  25, NULL),
+    ('HS-004', 'Borosil Klip N Store Glass Container',         'Borosil',          'home-storage',          1, 'l',     549,  10,  30, NULL),
+    ('HS-005', 'Cello Plastic Bucket',                         'Cello',            'home-storage',         20, 'l',     349,  10,  25, NULL),
+    ('HS-006', 'Ezee Cling Film Wrap',                         'Ezee',             'home-storage',          1, 'pcs',   149,   5,  60, NULL),
+    ('HS-007', 'Cello Laundry Basket',                         'Cello',            'home-storage',         50, 'l',     699,  20,  15, NULL),
+    ('HS-008', 'Tupperware Aquasafe Bottles (Set of 4)',       'Tupperware',       'home-storage',          4, 'pcs',   899,  20,  20, NULL),
+    -- Electricals
+    ('EL-001', 'Philips 9W LED Bulb',                          'Philips',          'electricals',           1, 'pcs',    99,  20, 150, NULL),
+    ('EL-002', 'Philips 9W LED Bulb (Pack of 4)',              'Philips',          'electricals',           4, 'pcs',   349,  25,  60, NULL),
+    ('EL-003', 'Havells 4-Socket Extension Board',             'Havells',          'electricals',           1, 'pcs',   699,  20,  30, NULL),
+    ('EL-004', 'Duracell AA Batteries',                        'Duracell',         'electricals',           4, 'pcs',   180,  10, 120, 3650),
+    ('EL-005', 'Eveready AAA Batteries',                       'Eveready',         'electricals',           4, 'pcs',    80,   0, 150, 1825),
+    ('EL-006', 'Syska 20W LED Batten',                         'Syska',            'electricals',           1, 'pcs',   450,  30,  25, NULL),
+    ('EL-007', 'Havells Table Fan 400mm',                      'Havells',          'electricals',           1, 'pcs',  2499,  20,   8, NULL),
+    ('EL-008', 'Eveready Rechargeable LED Torch',              'Eveready',         'electricals',           1, 'pcs',   399,  15,  40, NULL),
+    ('EL-009', 'Philips Beard Trimmer',                        'Philips',          'electricals',           1, 'pcs',  1299,  25,  20, NULL),
+    -- Stationery
+    ('SY-001', 'Classmate Single Line Notebooks (6-pack)',     'Classmate',        'stationery',            6, 'pcs',   390,  10,  80, NULL),
+    ('SY-002', 'Reynolds Trimax Blue Pen',                     'Reynolds',         'stationery',            1, 'pcs',    50,   0, 150, NULL),
+    ('SY-003', 'Camlin Wax Crayons 24 Shades',                 'Camlin',           'stationery',           24, 'pcs',    90,   5,  70, NULL),
+    ('SY-004', 'Faber-Castell Graphite Pencils',               'Faber-Castell',    'stationery',           10, 'pcs',    60,   0, 120, NULL),
+    ('SY-005', 'Fevicol MR Adhesive',                          'Fevicol',          'stationery',          200, 'g',      50,   0,  90,  730),
+    ('SY-006', 'Classmate Geometry Box',                       'Classmate',        'stationery',            1, 'pcs',   120,  10,  60, NULL),
+    ('SY-007', 'Camlin Permanent Marker Black',                'Camlin',           'stationery',            1, 'pcs',    30,   0, 100, NULL),
+    ('SY-008', 'Doms Non-Dust Erasers',                        'Doms',             'stationery',            5, 'pcs',    25,   0, 150, NULL),
+    -- Pet Care
+    ('PT-001', 'Pedigree Adult Chicken & Vegetables',          'Pedigree',         'pet-care',              3, 'kg',    899,  15,  25,  365),
+    ('PT-002', 'Pedigree Puppy Chicken & Milk',                'Pedigree',         'pet-care',            1.2, 'kg',    399,  10,  30,  365),
+    ('PT-003', 'Whiskas Adult Ocean Fish',                     'Whiskas',          'pet-care',            1.2, 'kg',    499,  10,  25,  365),
+    ('PT-004', 'Whiskas Kitten Tuna in Jelly Pouch',           'Whiskas',          'pet-care',             85, 'g',      45,   0, 120,  540),
+    ('PT-005', 'Drools Focus Adult Dog Food',                  'Drools',           'pet-care',              3, 'kg',   1100,  20,  15,  365),
+    ('PT-006', 'Himalaya Erina Pet Shampoo',                   'Himalaya',         'pet-care',            200, 'ml',    199,   5,  40, 1095),
+    ('PT-007', 'Pedigree Dentastix Medium (7 sticks)',         'Pedigree',         'pet-care',            180, 'g',     199,  10,  45,  365)
+) AS v(sku, name, brand, category, unit_size, unit, price, discount_percent, quantity, shelf_life)
+JOIN brands     b ON b.name = v.brand
+JOIN categories c ON c.slug = v.category;
+
+
+-- Expiry: products with a shelf life get a manufactured_date in the
+-- past and expiry_date = manufactured_date + shelf_life_days.
+-- Everything starts fresh; specific items are adjusted below.
+
+UPDATE products
+SET manufactured_date = CURRENT_DATE - ((id * 7) % GREATEST(shelf_life_days - 1, 1))
+WHERE shelf_life_days IS NOT NULL;
+
+UPDATE products
+SET expiry_date = manufactured_date + shelf_life_days
+WHERE shelf_life_days IS NOT NULL;
+
+-- Already expired (negative) and expiring soon (0–3 days) — for testing
+UPDATE products p
+SET expiry_date       = CURRENT_DATE + v.days_left,
+    manufactured_date = CURRENT_DATE + v.days_left - p.shelf_life_days
+FROM (VALUES
+    ('FV-007', -2), ('FV-010', -1), ('DE-001', -1), ('BK-001', -3), ('MS-003', -1),
+    ('DE-008', -5), ('BV-006', -10), ('BK-005', -7), ('SN-007', -4),
+    ('DE-009',  0), ('MS-001',  1), ('DE-004',  1), ('FV-001',  2), ('DE-005',  2),
+    ('BK-009',  1), ('FV-003',  3), ('DE-006',  3), ('FZ-004',  3)
+) AS v(sku, days_left)
+WHERE p.sku = v.sku;
+
+-- A few out-of-stock items
+UPDATE products SET quantity = 0
+WHERE sku IN ('FV-012', 'MS-004', 'CH-006', 'KW-007', 'EL-007', 'BC-002', 'SP-009');
+
+-- Images (placeholders, colour-coded by category)
+
+
+-- Turns "Lay's Magic Masala" into "Lays+Magic+Masala" for the URL
+CREATE FUNCTION pg_temp.url_text(t TEXT) RETURNS TEXT AS $$
+    SELECT regexp_replace(
+               trim(regexp_replace(translate(t, 'é''', 'e'), '[^A-Za-z0-9 ]', ' ', 'g')),
+               '\s+', '+', 'g');
+$$ LANGUAGE sql IMMUTABLE;
+
+CREATE TEMP TABLE _palette (slug TEXT PRIMARY KEY, bg TEXT, fg TEXT) ON COMMIT DROP;
+INSERT INTO _palette VALUES
+    ('fruits-vegetables',  'C8E6C9', '1B5E20'),
+    ('dairy-eggs',         'E3F2FD', '0D47A1'),
+    ('bakery',             'FFE0B2', 'E65100'),
+    ('meat-seafood',       'FFCCBC', 'BF360C'),
+    ('staples',            'FFF9C4', 'F57F17'),
+    ('oils-ghee',          'FFECB3', 'FF6F00'),
+    ('spices',             'FFCDD2', 'B71C1C'),
+    ('snacks',             'FFE082', 'BF360C'),
+    ('beverages',          'D7CCC8', '3E2723'),
+    ('breakfast',          'F8BBD0', '880E4F'),
+    ('chocolates-sweets',  'BCAAA4', '3E2723'),
+    ('frozen',             'E1F5FE', '01579B'),
+    ('personal-care',      'B2EBF2', '006064'),
+    ('baby-care',          'FCE4EC', 'AD1457'),
+    ('household-cleaning', 'D1C4E9', '311B92'),
+    ('kitchenware',        'CFD8DC', '263238'),
+    ('home-storage',       'DCEDC8', '33691E'),
+    ('electricals',        'FFF59D', '424242'),
+    ('stationery',         'C5CAE9', '1A237E'),
+    ('pet-care',           'D7CCC8', '4E342E');
+
+UPDATE categories c
+SET image_url = format('https://placehold.co/800x400/%s/%s?text=%s',
+                       pal.bg, pal.fg, pg_temp.url_text(c.name))
+FROM _palette pal
+WHERE pal.slug = c.slug;
+
+UPDATE brands
+SET logo_url = format('https://placehold.co/300x300/FFFFFF/333333?text=%s',
+                      pg_temp.url_text(name));
+
+UPDATE products p
+SET image_url = format('https://placehold.co/600x600/%s/%s?text=%s',
+                       pal.bg, pal.fg, pg_temp.url_text(p.name))
+FROM categories c
+JOIN _palette pal ON pal.slug = c.slug
+WHERE c.id = p.category_id;
+
+-- ---------------------------------------------------------------------
+-- Reviews (0–4 per product, mostly positive, food vs home wording)
+-- ---------------------------------------------------------------------
+INSERT INTO reviews (product_id, reviewer_name, is_verified, rating, review_text, created_at)
+SELECT p.id,
+       (ARRAY['Priya S','Arjun K','Meena R','Karthik V','Divya N','Rahul M','Anitha P',
+              'Suresh B','Lakshmi T','Vikram J','Sneha G','Rohan D','Kavya L','Aditya P',
+              'Fatima Z','Joseph M','Harini S','Imran K','Neha T','Ganesh R'])[1 + (p.id * 7 + g * 3) % 20],
+       (p.id + g) % 3 <> 0,
+       t.rating,
+       t.review_text,
+       now() - make_interval(days => (p.id * 3 + g * 11) % 120,
+                             hours => (p.id + g * 5) % 24)
+FROM products p
+JOIN categories c ON c.id = p.category_id
+CROSS JOIN generate_series(1, 4) AS g
+JOIN (VALUES
+    ('food', 5, 0, 'Excellent quality and very fresh. Will definitely buy again.'),
+    ('food', 5, 1, 'Tastes great and the whole family loved it. Good value for money.'),
+    ('food', 4, 0, 'Good product for the price. Packaging could be a little better.'),
+    ('food', 4, 1, 'Fresh and well packed. Delivery was quick too.'),
+    ('food', 3, 0, 'It is okay. Nothing special compared to other brands.'),
+    ('food', 3, 1, 'Average taste. Expected a bit more for this price.'),
+    ('food', 2, 0, 'Quality was below what I expected this time.'),
+    ('food', 2, 1, 'Received it close to the expiry date. Not happy.'),
+    ('food', 1, 0, 'Did not like it at all. Would not recommend.'),
+    ('food', 1, 1, 'Packet was damaged and the product was stale.'),
+    ('home', 5, 0, 'Works perfectly and feels very well made. Highly recommended.'),
+    ('home', 5, 1, 'Excellent value. Exactly as described and easy to use.'),
+    ('home', 4, 0, 'Good quality overall. Does the job well.'),
+    ('home', 4, 1, 'Nice product, though it is slightly smaller than I expected.'),
+    ('home', 3, 0, 'Decent, but there are better options at this price.'),
+    ('home', 3, 1, 'Okay for daily use. Nothing exceptional.'),
+    ('home', 2, 0, 'Build quality feels cheap. Not sure it will last.'),
+    ('home', 2, 1, 'Stopped working properly after a few weeks.'),
+    ('home', 1, 0, 'Arrived damaged. Very disappointed.'),
+    ('home', 1, 1, 'Waste of money. Would not buy again.')
+) AS t(grp, rating, variant, review_text)
+  ON  t.grp = CASE WHEN c.slug IN ('fruits-vegetables','dairy-eggs','bakery','meat-seafood',
+                                    'staples','oils-ghee','spices','snacks','beverages',
+                                    'breakfast','chocolates-sweets','frozen','pet-care')
+                   THEN 'food' ELSE 'home' END
+  AND t.rating  = (ARRAY[5,4,5,3,4,5,2,4,1,5,4,3])[1 + (p.id * 5 + g * 7) % 12]
+  AND t.variant = (p.id + g) % 2
+WHERE p.id % 9 <> 0            -- every 9th product has no reviews yet
+  AND (p.id * g) % 5 <> 0;     -- vary how many each product gets
+
+COMMIT;
+

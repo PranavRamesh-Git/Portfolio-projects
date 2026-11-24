@@ -45,3 +45,23 @@ PostgreSQL triggers automatically generate and update sensor alerts when reading
 Django REST Framework powers QuickCheck, providing authenticated, paginated sensor-reading endpoints with sensor-code and breach-status filtering. JavaScript Fetch API integrates these endpoints into the frontend, while Django ModelForms and class-based views handle equipment updates and alert transitions.
 
 Built to demonstrate practical Python backend engineering, Django application development, relational database design, SQL automation, asynchronous task processing, REST API development, authentication, and automated testing.
+
+## OUTPUT SCREENSHOTS:
+  <img width="2872" height="1599" alt="image" src="https://github.com/user-attachments/assets/248f0fa5-7c17-4e9d-8278-1f7012148350" />
+  -------------------------------------------------------------------------------------------------------------------------------------
+  <img width="2940" height="1675" alt="image" src="https://github.com/user-attachments/assets/e6ac1f78-cb5a-4aa2-9d48-9b6e6b2d99d3" />
+ -------------------------------------------------------------------------------------------------------------------------------------
+ 
+  <img width="2940" height="1661" alt="image" src="https://github.com/user-attachments/assets/1489a0c8-dd83-4cd6-935b-09f5acd43f09" />
+ -------------------------------------------------------------------------------------------------------------------------------------
+  
+  <img width="2940" height="1686" alt="image" src="https://github.com/user-attachments/assets/bf7d7803-f1f6-41eb-a13e-40edb47f4c84" />
+ -------------------------------------------------------------------------------------------------------------------------------------
+  
+  <img width="2941" height="1700" alt="image" src="https://github.com/user-attachments/assets/2be04eb2-6981-48ba-af6b-e9d1b818371c" />
+
+  
+
+
+  
+

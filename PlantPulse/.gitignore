@@ -25,3 +25,5 @@ htmlcov/
 
 # Local databases
 *.sqlite3
+
+.tests_prac.txt

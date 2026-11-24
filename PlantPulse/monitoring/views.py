@@ -225,6 +225,7 @@ class AlertsUpdateViews(LoginRequiredMixin, UpdateView):
 
         new_status = form.cleaned_data["status"]
 
+
         # Prevent reopening resolved alerts
         if old_status == "RESOLVED" and new_status != "RESOLVED":
 
@@ -260,13 +261,15 @@ class AlertsUpdateViews(LoginRequiredMixin, UpdateView):
                 return self.form_invalid(form)
 
         # Record employee name
-        if old_status == "OPEN" and new_status in ("ACKNOWLEDGED", "RESOLVED"):
+        if old_status == "OPEN" and new_status == "ACKNOWLEDGED":
 
             form.instance.acknowledged_by = (
                 self.request.user.get_full_name()
                 or self.request.user.username
             )
 
+        if old_status == "RESOLVED" and "resolution_note" in form.changed_data:
+            form.instance.resolved_at = timezone.now()
         response = super().form_valid(form)
 
         messages.success(

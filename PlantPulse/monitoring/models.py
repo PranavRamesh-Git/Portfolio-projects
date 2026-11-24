@@ -235,14 +235,11 @@ class Alert(models.Model):
         else:
             self.alert_type = "HIGH"
 
-        if self.status == "RESOLVED":
+        if self.status == "RESOLVED" and self.resolved_at is None:
             self.resolved_at = timezone.now()
 
-        if (
-            self.status in ("ACKNOWLEDGED", "RESOLVED")
-        ):
+        if self.status == "ACKNOWLEDGED" and self.acknowledged_at is None:
             self.acknowledged_at = timezone.now()
-
         super().save(*args, **kwargs)
 
     class Meta:

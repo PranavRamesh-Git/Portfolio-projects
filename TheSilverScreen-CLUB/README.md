@@ -26,3 +26,28 @@ The Silver Screen Club separates authentication, content discovery, library mana
 Redis-backed caching reduces repeated TMDB API requests for identical discovery parameters, while Redis-backed rate limiting helps control excessive authentication and recommendation requests. User-specific library information is handled separately from cached public content.
 
 Built to demonstrate practical Python backend engineering, third-party API integration, session security, relational database design, HTTP API development, and automated testing.
+
+## OUTPUT SCREENSHOTS
+<img width="2940" height="1758" alt="image" src="https://github.com/user-attachments/assets/62360872-27b9-4fcf-be48-b206eafdfcad" />
+
+<img width="2940" height="1680" alt="image" src="https://github.com/user-attachments/assets/5dec4d64-9dc2-4e2b-826c-2e4e9604baac" />
+
+<img width="2940" height="1759" alt="image" src="https://github.com/user-attachments/assets/f7f2f24a-e8ba-4ede-834e-69b7ff242268" />
+
+<img width="2940" height="1659" alt="image" src="https://github.com/user-attachments/assets/970090f8-6578-455d-86ee-5f6426e4ee93" />
+
+<img width="2940" height="1670" alt="image" src="https://github.com/user-attachments/assets/dcb580bd-d211-4537-9709-ceeaab621612" />
+
+<img width="2940" height="1675" alt="image" src="https://github.com/user-attachments/assets/be564cc5-ff1f-4aed-92fa-f6604fe9748f" />
+
+<img width="2940" height="1691" alt="image" src="https://github.com/user-attachments/assets/1a05ff37-497c-46cc-b2be-258e99b77f9c" />
+
+<img width="2940" height="1661" alt="image" src="https://github.com/user-attachments/assets/bcf34b45-19b6-49aa-a64c-3e74879e9bc7" />
+
+
+
+
+
+
+
+

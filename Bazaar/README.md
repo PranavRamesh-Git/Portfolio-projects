@@ -35,3 +35,26 @@ The application prevents unavailable products from being purchased while preserv
 
 
 Built to demonstrate practical Python backend engineering, relational database design, API development, and transactional business workflows.
+
+## OUTPUT SCREENSHOTS
+<img width="2941" height="1769" alt="image" src="https://github.com/user-attachments/assets/6043a7ce-3056-4301-84ff-678dbefb7e1e" />
+
+<img width="2940" height="1743" alt="image" src="https://github.com/user-attachments/assets/f377c8ac-1892-4f3c-9d7a-55d8c0772c6a" />
+
+<img width="2940" height="1660" alt="image" src="https://github.com/user-attachments/assets/028279fa-e198-492c-bb58-bc166938e7ce" />
+
+<img width="2940" height="1768" alt="image" src="https://github.com/user-attachments/assets/caa19a67-ca6e-47b4-a06a-86d0f9e290d0" />
+
+<img width="2940" height="1659" alt="image" src="https://github.com/user-attachments/assets/094a37f7-cd73-4313-9f0e-c2dc330e3d8f" />
+
+## ADMIN VIEW 
+
+<img width="2940" height="1697" alt="image" src="https://github.com/user-attachments/assets/9008cd97-b883-43f3-bd83-cd95447d7e36" />
+
+<img width="2940" height="1672" alt="image" src="https://github.com/user-attachments/assets/0eda2c5d-afcd-4338-8f78-4222d750b7c1" />
+
+<img width="2940" height="1666" alt="image" src="https://github.com/user-attachments/assets/6a24a901-f2d8-49a4-b886-a76e22d42ddd" />
+
+
+
+

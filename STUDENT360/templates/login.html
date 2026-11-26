@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %} | Login {% endblock %}
+
+{% block content %}
+
+<header class="header">
+    <h1>STUDENT360</h1>
+</header>
+
+<main class="login-container">
+
+    <form class="login-form" method="POST" action="{{ url_for('login') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <h2>Login to your STUDENT360 account</h2>
+        <div class="form-group">
+            <label for="t-details">Enter username , email or phone number</label>
+            <input type="text" id="t-details" name="t-details" required>
+        </div>
+
+        <div class="form-group">
+            <div class="password-heading">
+                <label for="password">Password</label>
+            </div>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn login-btn">Login</button>
+    </form>
+
+</main>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+select * from class_section;
+select * from subjects;
+select * from subjects_choice;
+select * from students order by full_name asc;
+select * from assessments;
+select * from marks;
+select * from view_student_profiles;
+select * from view_assessments_subject;
+select * from view_student_marks;
+select * from subject_wise_marks;
+select * from student_total_marks;
+select * from view_student_rank;
+
+
+
+select * from (select *,RANK() OVER(order by total_percentage desc) as total_rank FROM student_total_marks) ranked  ORDER BY  total_rank
+
+
+
+
+CREATE OR REPLACE VIEW subject_wise_marks
+ AS
+ SELECT s.full_name,
+    s.subject,
+    sum(s.marks_obtained) AS total_marks,
+    sum(s.max_marks) AS total_max_marks,
+    round(sum(s.marks_obtained) / sum(s.max_marks) * 100::numeric, 2) AS subject_percentage,
+    s.subject_id,
+    s.student_id,
+	v.class_name
+   FROM view_student_marks s
+   JOIN view_student_profiles v
+   	ON s.student_id = v.student_id
+  GROUP BY s.full_name, s.student_id, s.subject_id, s.subject, v.class_name
+  ORDER BY student_id, full_name, subject_id;
+
+
+
+
+
+  SELECT
+    *,
+    RANK() OVER (
+        PARTITION BY class_name
+        ORDER BY total_percentage DESC
+    ) AS class_rank,
+
+    RANK() OVER (
+        ORDER BY total_percentage DESC
+    ) AS overall_rank	
+FROM student_total_marks
+WHERE class_name IN ('12A', '12B', '12C', '12D')
+order by class_rank;

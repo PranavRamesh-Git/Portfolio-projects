@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<header class="header">
+    <div class="title">
+        <h1 class="title">STUDENT-360</h1>
+    </div>
+    <nav class="navbar">
+        <div class="btn">
+            <button type="button" id="student-profile" class="nav-opt active">STUDENT PROFILES</button>
+        </div>
+        <div class="btn">
+            <button type="button" id="analytics" class="nav-opt">ANALYTICS</button>
+        </div>
+        <div>
+            <a href="{{ url_for('logout')}}" class="logout">LOGOUT</a>
+        </div>
+    </nav>
+</header>
+<main>
+    <section id="students-page" class="students-page active">
+        <h2>YOUR STUDENTS</h2>
+
+        <div class="class-filter">
+            <span class="filter-title">YOUR CLASSES</span>
+                <select name="class_name" id="class_name">
+                        <option value = "">SELECT CLASS</option>
+                    {% for class in classes %}
+                        <option value="{{ class }}">{{ class }}</option>
+                    {% endfor %}
+                </select>
+        </div>
+
+        <div class="searchbar">
+            <input type="text" class="profile-search" id="profile-search" placeholder="SEARCH ..." name="search">
+        </div>
+
+
+        <div class="buttons">
+            <button type="button" id="clear-filters">CLEAR</button>
+            <button id="search-filters" type="button">APPLY</button>
+        </div>
+
+
+        <div class="profile-container" id="profile-container">
+            <h3>SELECT A CLASS OR SEARCH FOR A STUDENT</h3>
+        </div>
+
+
+    </section>
+    
+    <section id="analytics-page"  class="analytics-page">
+        <h2>ANALYTICS</h2> 
+        <nav id="analytics-classes" class="analytics-classes">
+            <button id="class-12" class="class-btn" data-grade="12">CLASS 12</button>
+            <button id="class-11" class="class-btn" data-grade="11">CLASS 11</button>
+            <button id="class-10" class="class-btn" data-grade="10">CLASS 10</button>
+            <button id="class-9"  class="class-btn" data-grade="9">CLASS 9</button>
+            <button id="class-8"  class="class-btn" data-grade="8">CLASS 8</button>
+            <button id="class-7"  class="class-btn" data-grade="7">CLASS 7</button>
+            <button id="class-6"  class="class-btn" data-grade="6">CLASS 6</button>     
+        </nav>
+        <div class="section-specific" id="section-specific">
+            <div id="cl12" class="opt">
+                <button type="button" class="overall" data-id="12">CLASS 12</button>
+                <button type="button" class="classes" data-id="12A" data-grade="12">CLASS 12A</button>
+                <button type="button" class="classes" data-id="12B" data-grade="12">CLASS 12B</button>
+                <button type="button" class="classes" data-id="12C" data-grade="12">CLASS 12C</button>
+                <button type="button" class="classes" data-id="12D" data-grade="12">CLASS 12D</button>
+            </div>
+            <div id="cl11" class="opt">
+                <button type="button" class="overall" data-id="11">CLASS 11</button>
+                <button type="button" class="classes" data-id="11A" data-grade="11">CLASS 11A</button>
+                <button type="button" class="classes" data-id="11B" data-grade="11">CLASS 11B</button>
+                <button type="button" class="classes" data-id="11C" data-grade="11">CLASS 11C</button>
+                <button type="button" class="classes" data-id="11D" data-grade="11">CLASS 11D</button>
+            </div>
+            <div id="cl10" class="opt">
+                <button type="button" class="overall" data-id="10">CLASS 10</button>
+                <button type="button" class="classes" data-id="10A" data-grade="10">CLASS 10A</button>
+                <button type="button" class="classes" data-id="10B" data-grade="10">CLASS 10B</button>
+                <button type="button" class="classes" data-id="10C" data-grade="10">CLASS 10C</button>
+            </div>
+            <div id="cl9" class="opt">
+                <button type="button" class="overall" data-id="9">CLASS 9</button>
+                <button type="button" class="classes" data-id="9A" data-grade="9">CLASS 9A</button>
+                <button type="button" class="classes" data-id="9B" data-grade="9">CLASS 9B</button>
+                <button type="button" class="classes" data-id="9C" data-grade="9">CLASS 9C</button>
+            </div>
+            <div id="cl8" class="opt">
+                <button type="button" class="overall" data-id="8">CLASS 8</button>
+                <button type="button" class="classes" data-id="8A" data-grade="8">CLASS 8A</button>
+                <button type="button" class="classes" data-id="8B" data-grade="8">CLASS 8B</button>
+                <button type="button" class="classes" data-id="8C" data-grade="8">CLASS 8C</button>
+            </div>
+            <div id="cl7" class="opt">
+                <button type="button" class="overall" data-id="7">CLASS 7</button>
+                <button type="button" class="classes" data-id="7A" data-grade="7">CLASS 7A</button>
+                <button type="button" class="classes" data-id="7B" data-grade="7">CLASS 7B</button>
+                <button type="button" class="classes" data-id="7C" data-grade="7">CLASS 7C</button>
+            </div>
+            <div id="cl6" class="opt">
+                <button type="button" class="overall" data-id="6">CLASS 6</button>
+                <button type="button" class="classes" data-id="6A" data-grade="6">CLASS 6A</button>
+                <button type="button" class="classes" data-id="6B" data-grade="6">CLASS 6B</button>
+                <button type="button" class="classes" data-id="6C" data-grade="6">CLASS 6C</button>
+            </div>
+        </div>        
+        <div class= "analytics">
+            <div id="stats">
+
+                <div id="overall">
+            
+                </div>
+                <div id="subWise">
+            
+                </div>
+                <div id="student-list">  
+                </div>  
+            </div>                       
+        </div>      
+
+    </section>
+
+    <div class="modal-overlay" id="student-modal">
+        <div class="student-modal">
+            <div id="student-modal-container"></div>
+            <button type="button" class="close-modal" id="modal-close-btn">CLOSE</button>
+        </div>
+    </div>
+
+    <div class="marksheet-modal-overlay" id="marksheet-modal">
+        <div class="marksheet-modal">
+            <h2>STUDENT MARKSHEET</h2>
+
+            <div id="marksheet-modal-container"></div>
+
+            <button type="button" class="close-modal" id="marksheet-modal-close-btn">CLOSE</button>
+        </div>
+    </div>     
+</main>
+
+
+
+{% endblock %}

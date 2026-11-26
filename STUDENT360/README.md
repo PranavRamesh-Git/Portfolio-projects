@@ -1,4 +1,4 @@
-TUDENT360 — Student Management & Academic Analytics Dashboard
+STUDENT360 — Student Management & Academic Analytics Dashboard
 STUDENT360 is a full-stack student information and academic performance dashboard built with Python, Flask, PostgreSQL, React, JavaScript, HTML, and CSS. It enables authenticated teachers to explore student records for their assigned sections and analyze academic performance across grades and sections.
 
 The application combines a Flask REST-style API, PostgreSQL queries and views, and a React frontend for interactive search, student profiles, marksheets, and academic analytics.

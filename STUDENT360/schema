@@ -1,0 +1,210 @@
+CREATE TABLE class_section (
+	class_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	class_name VARCHAR(10) NOT NULL UNIQUE	
+);
+
+
+
+CREATE TABLE subjects_choice (
+	subject_choice_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	sub1 VARCHAR(50) NOT NULL,
+	sub2 VARCHAR(50) NOT NULL, 
+	sub3 VARCHAR(50) NOT NULL,
+	sub4 VARCHAR(50) NOT NULL,
+	sub5 VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE subjects (
+	subject_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	subject VARCHAR(50) NOT NULL UNIQUE
+);
+
+
+CREATE TABLE students (
+	id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	full_name VARCHAR(50) NOT NULL UNIQUE,
+	roll_number VARCHAR(255) NOT NULL UNIQUE,
+	email VARCHAR(255) NOT NULL UNIQUE,
+	phone_no VARCHAR(10) NOT NULL UNIQUE,
+	dob DATE NOT NULL,
+	subject_choice_id BIGINT NOT NULL,
+	class_id BIGINT NOT NULL,
+	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY (subject_choice_id)
+		REFERENCES subjects_choice(subject_choice_id)
+		ON DELETE CASCADE, 
+	FOREIGN KEY (class_id)
+		REFERENCES class_section(class_id)
+		ON DELETE CASCADE 	
+);
+
+
+
+CREATE TABLE assessments (
+    assessment_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+
+    assessment_name VARCHAR(100) NOT NULL,
+
+    assessment_type VARCHAR(30) NOT NULL,
+
+    subject_id BIGINT NOT NULL,
+
+    max_marks NUMERIC(5,2) NOT NULL,
+
+    assessment_date DATE,
+    assessment_class VARCHAR(20) NOT NULL,
+
+    FOREIGN KEY (subject_id)
+        REFERENCES subjects(subject_id),
+
+    CHECK (
+        assessment_type IN (
+            'INTERNAL',
+            'ASSIGNMENT',
+            'PRACTICAL',
+            'FINAL'
+        )
+    )
+);
+
+CREATE TABLE marks (
+    mark_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+
+    student_id BIGINT NOT NULL,
+    assessment_id BIGINT NOT NULL,
+
+    marks_obtained NUMERIC(5,2) NOT NULL,
+
+    FOREIGN KEY (student_id)
+        REFERENCES students(id)
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (assessment_id)
+        REFERENCES assessments(assessment_id)
+        ON DELETE CASCADE,
+
+    UNIQUE (student_id, assessment_id)
+);
+
+
+
+
+CREATE VIEW view_student_profiles AS
+SELECT
+	s.id as student_id,
+	s.full_name,
+	s.roll_number,
+	s.email,
+	s.phone_no,
+	s.dob,
+	c.class_name AS class_name,
+	sub.sub1 AS sub1,
+	sub.sub2 AS sub2,
+	sub.sub3 AS sub3,
+	sub.sub4 AS sub4,
+	sub.sub5 AS sub5
+FROM students s
+JOIN class_section c
+	ON s.class_id = c.class_id
+JOIN subjects_choice sub
+	ON s.subject_choice_id = sub.subject_choice_id
+
+
+CREATE OR REPLACE VIEW view_assessments_subject AS
+SELECT 
+    a.assessment_id,
+    a.assessment_name,
+    a.assessment_type,
+    a.subject_id,
+    a.max_marks,
+    a.assessment_date,
+    sub.subject AS subject,
+	a.assessment_class
+FROM assessments a
+JOIN subjects sub
+    ON a.subject_id = sub.subject_id;
+
+
+
+
+CREATE OR REPLACE VIEW view_student_marks
+ AS
+ SELECT m.student_id,
+    s.full_name,
+    s.roll_number,
+    v.assessment_name,
+    v.max_marks,
+    v.subject,
+    m.marks_obtained,
+    v.subject_id,
+	vsp.class_name,
+    v.assessment_class
+   FROM marks m
+     JOIN students s ON s.id = m.student_id
+     JOIN view_assessments_subject v ON v.assessment_id = m.assessment_id
+	 JOIN view_student_profiles vsp ON vsp.student_id = m.student_id;
+ 
+
+CREATE OR REPLACE VIEW student_total_marks
+ AS
+ SELECT full_name,
+    round(sum(subject_percentage) / 500::numeric * 100::numeric, 2) AS total_percentage,
+    student_id,
+    class_name,
+	assessment_class
+   FROM subject_wise_marks
+  GROUP BY full_name, student_id, class_name,assessment_class
+  ORDER BY student_id, full_name;
+
+CREATE OR REPLACE VIEW subject_wise_marks
+ AS
+ SELECT s.full_name,
+    s.subject,
+    sum(s.marks_obtained) AS total_marks,
+    sum(s.max_marks) AS total_max_marks,
+    round(sum(s.marks_obtained) / sum(s.max_marks) * 100::numeric, 2) AS subject_percentage,
+    s.subject_id,
+    s.student_id,
+    v.class_name,
+	s.assessment_class
+   FROM view_student_marks s
+     JOIN view_student_profiles v ON s.student_id = v.student_id
+  GROUP BY s.full_name, s.student_id, s.subject_id, s.subject, v.class_name,s.assessment_class
+  ORDER BY s.student_id, s.full_name, s.subject_id;
+
+
+CREATE TABLE teachers (
+    teacher_id    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    username      VARCHAR(255) NOT NULL UNIQUE,
+    fullname      VARCHAR(255) NOT NULL,
+    phonenumber   VARCHAR(10)  NOT NULL UNIQUE,
+    email         TEXT         NOT NULL UNIQUE,
+    password_hash TEXT         NOT NULL,
+    role          VARCHAR(20)  NOT NULL DEFAULT 'TEACHER'
+                  CHECK (role IN ('TEACHER', 'ADMIN')),
+    class_access  TEXT[]       NOT NULL DEFAULT '{}',
+    created_at    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE OR REPLACE VIEW view_student_rank AS
+SELECT
+    full_name,
+    total_percentage,
+    student_id,
+    class_name,
+
+    RANK() OVER (
+        PARTITION BY class_name
+        ORDER BY total_percentage DESC
+    ) AS class_rank,
+
+    RANK() OVER (
+        PARTITION BY assessment_class
+        ORDER BY total_percentage DESC
+    ) AS overall_rank,
+
+    assessment_class
+
+FROM student_total_marks;
+
+

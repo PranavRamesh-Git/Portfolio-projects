@@ -1,0 +1,68 @@
+# Secrets
+.env
+.env.*
+!.env_example
+temp.py
+tmdb_service.py
+flask sqlalchemy
+
+# Python virtual environment
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# IDE / macOS
+.vscode/
+.idea/
+.DS_Store
+__MACOSX/
+
+# Logs
+*.log
+logs/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local databases
+
+*.sqlite3
+trial.py
+temp.py
+responses.txt
+
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+
+# React and Node
+node_modules/
+frontend/dist/
+frontend/node_modules/
+frontend/.vite/
+dist/
+
+# Local data and uploads
+static/uploads/
+*.sqlite3
+
+# IDE and OS files
+.DS_Store
+__MACOSX/
+.vscode/
+.idea/
+
+# Logs
+*.log
+logs/

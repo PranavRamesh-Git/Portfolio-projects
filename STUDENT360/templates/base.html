@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUDENT-360</title>
+    <meta name="csrf_token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/style.css')}}">
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                        <button class="flash-close" type="button" aria-label="close">&times;</button>                        
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    {% block content %}
+    {% endblock %}    
+    <footer>&copy; 2026 STUDENT-360 All rights reserved</footer>
+    
+    
+</body>
+</html>

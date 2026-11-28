@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+
+  <h1>LOGIN</h1>
+  {% if rate_limit_error %}
+      <p class="flash-message error">
+          {{ rate_limit_error }}
+      </p>
+  {% endif %}
+
+  <div class="form">
+    <form action="{{ url_for('login') }}" method="POST">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div>
+          <label>Username or email or Phone Number : </label>
+          <input type="text" name="input_value" placeholder="USERNAME/EMAIL/PHONE NUMBER ....." required>
+        </div>
+
+        <div>
+          <label>PASSWORD : </label>
+          <input type="password" name="password" placeholder="PASSWORD....." required>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit">Login</button>
+
+            <a href="{{ url_for('register') }}">
+                Create account
+            </a>
+
+        </div>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+
+{% endblock %}

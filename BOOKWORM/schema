@@ -1,0 +1,70 @@
+CREATE TABLE users (
+    user_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    fullname VARCHAR(255) NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    phone VARCHAR(20) NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+
+
+CREATE TABLE books (
+    book_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    google_book_id TEXT NOT NULL UNIQUE,
+    title VARCHAR(200) DEFAULT 'NA',
+    summary TEXT DEFAULT 'NA',
+    image_url TEXT DEFAULT '/static/images/NA.png'
+);
+
+
+CREATE TABLE user_books (
+    user_book_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+
+    user_id BIGINT NOT NULL,
+    book_id BIGINT NOT NULL,
+    google_book_id TEXT NOT NULL,
+    reading_status VARCHAR(100)
+        NOT NULL DEFAULT 'ADD TO MYBOOKS',
+
+    UNIQUE (user_id, book_id),
+    UNIQUE (user_id, google_book_id),
+
+    FOREIGN KEY (user_id)
+        REFERENCES users(user_id)
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (book_id)
+        REFERENCES books(book_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT chk_reading_status
+        CHECK (
+            reading_status IN (
+                'ADD TO MYBOOKS',
+                'ON MY BOOKS',
+                'ON READING LIST',
+                'CURRENTLY READING',
+                'FINISHED',
+                'DROPPED',
+                'REREADING'
+            )
+        )
+);
+CREATE OR REPLACE VIEW user_book_details AS
+SELECT
+    u.user_book_id,
+    u.user_id,
+    u.book_id,
+    u.google_book_id,
+    u.reading_status,
+    b.title,
+    b.summary,
+    b.image_url
+FROM user_books AS u
+JOIN books AS b
+    ON b.book_id = u.book_id;
+	

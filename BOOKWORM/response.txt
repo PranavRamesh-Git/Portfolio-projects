@@ -1,0 +1,917 @@
+
+  "kind": "books#volumes",
+  "totalItems": 355,
+  "items": [
+    {
+      "kind": "books#volume",
+      "id": "hxL2qWMAgv8C",
+      "etag": "oztTNahoZ/w",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/hxL2qWMAgv8C",
+      "volumeInfo": {
+        "title": "Gone Girl",
+        "authors": [
+          "Gillian Flynn"
+        ],
+        "publisher": "Hachette UK",
+        "publishedDate": "2012-05-24",
+        "description": "THE ADDICTIVE No.1 BESTSELLER AND INTERNATIONAL PHENOMENON OVER 20 MILLION COPIES SOLD WORLDWIDE THE BOOK THAT DEFINES PSYCHOLOGICAL THRILLER Who are you? What have we done to each other? These are the questions Nick Dunne finds himself asking on the morning of his fifth wedding anniversary, when his wife Amy suddenly disappears. The police suspect Nick. Amy's friends reveal that she was afraid of him, that she kept secrets from him. He swears it isn't true. A police examination of his computer shows strange searches. He says they weren't made by him. And then there are the persistent calls on his mobile phone. So what really did happen to Nick's beautiful wife? 'Flynn is a brilliantly accomplished psychological crime writer and this latest book is so dark, so twisted and so utterly compelling that it actually messes with your mind' DAILY MAIL 'A near-masterpiece. Flynn is an extraordinary writer who, with every sentence, makes words do things that other writers merely dream of' SOPHIE HANNAH, Sunday Express 'You think you're reading a good, conventional thriller and then it grows into a fascinating portrait of one averagely mismatched relationship...Nothing's as it seems - Flynn is a fabulous plotter, and a very sharp observer of modern life in the aftermath of the credit crunch' THE TIMES 'One of the most popular thrillers of the year is also one of the smartest... Flynn's book cleverly outpaces its neo-noir trappings and consistently surprises the reader.' FINANCIAL TIMES",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9780297859406"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "0297859404"
+          }
+        ],
+        "readingModes": {
+          "text": true,
+          "image": false
+        },
+        "pageCount": 478,
+        "printType": "BOOK",
+        "categories": [
+          "Fiction"
+        ],
+        "averageRating": 3,
+        "ratingsCount": 3,
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": true,
+        "contentVersion": "0.22.26.0.preview.2",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=hxL2qWMAgv8C&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=hxL2qWMAgv8C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.co.in/books?id=hxL2qWMAgv8C&printsec=frontcover&dq=gone+girl&hl=&cd=1&source=gbs_api",
+        "infoLink": "https://play.google.com/store/books/details?id=hxL2qWMAgv8C&source=gbs_api",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=hxL2qWMAgv8C"
+      },
+      "saleInfo": {
+        "country": "IN",
+        "saleability": "FOR_SALE",
+        "isEbook": true,
+        "listPrice": {
+          "amount": 350.46,
+          "currencyCode": "INR"
+        },
+        "retailPrice": {
+          "amount": 245.32,
+          "currencyCode": "INR"
+        },
+        "buyLink": "https://play.google.com/store/books/details?id=hxL2qWMAgv8C&rdid=book-hxL2qWMAgv8C&rdot=1&source=gbs_api",
+        "offers": [
+          {
+            "finskyOfferType": 1,
+            "listPrice": {
+              "amountInMicros": 350460000,
+              "currencyCode": "INR"
+            },
+            "retailPrice": {
+              "amountInMicros": 245320000,
+              "currencyCode": "INR"
+            }
+          }
+        ]
+      },
+      "accessInfo": {
+        "country": "IN",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.co.in/books/download/Gone_Girl-sample-epub.acsm?id=hxL2qWMAgv8C&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=hxL2qWMAgv8C&hl=&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "What have we done to each other? These are the questions Nick Dunne finds himself asking on the morning of his fifth wedding anniversary, when his wife Amy suddenly disappears. The police suspect Nick."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "p5IIEAAAQBAJ",
+      "etag": "g4JaqlokXpw",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/p5IIEAAAQBAJ",
+      "volumeInfo": {
+        "title": "Antiheroines of Contemporary Media",
+        "subtitle": "Saints, Sinners, and Survivors",
+        "authors": [
+          "Melanie Haas",
+          "N. A. Pierce",
+          "Gretchen Busl"
+        ],
+        "publisher": "Bloomsbury Publishing PLC",
+        "publishedDate": "2020-12-02",
+        "description": "This volume of essays provides a critical foray into the methods used to construct narratives which foreground antiheroines, a trope which has become increasingly popular within literary media, film, and television. Antiheroine characters engage constructions of motherhood, womanhood, femininity, and selfhood as mediated by the structures that socially prescribe boundaries of gender, sex, and sexuality. Within this collection, scholars of literary, cultural, media, and gender studies address the complications of representing agency, autonomy, and self-determination within narrative texts complicated by age, class, race, sexuality, and a spectrum of privilege that reflects the complexities of scripting women on and off screen, within and beyond the page. This collection offers perspectives on the alternate narratives engendered through the motivations, actions, and agendas of the antiheroine, while engaging with the discourses of how such narratives are employed both as potentially feminist interventions and critiques of access, hierarchy, and power.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9781793624574"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "1793624577"
+          }
+        ],
+        "readingModes": {
+          "text": true,
+          "image": true
+        },
+        "pageCount": 233,
+        "printType": "BOOK",
+        "categories": [
+          "Social Science"
+        ],
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "0.2.3.0.preview.3",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=p5IIEAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=p5IIEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.co.in/books?id=p5IIEAAAQBAJ&pg=PA147&dq=gone+girl&hl=&cd=2&source=gbs_api",
+        "infoLink": "https://play.google.com/store/books/details?id=p5IIEAAAQBAJ&source=gbs_api",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=p5IIEAAAQBAJ"
+      },
+      "saleInfo": {
+        "country": "IN",
+        "saleability": "FOR_SALE",
+        "isEbook": true,
+        "listPrice": {
+          "amount": 3139,
+          "currencyCode": "INR"
+        },
+        "retailPrice": {
+          "amount": 3139,
+          "currencyCode": "INR"
+        },
+        "buyLink": "https://play.google.com/store/books/details?id=p5IIEAAAQBAJ&rdid=book-p5IIEAAAQBAJ&rdot=1&source=gbs_api",
+        "offers": [
+          {
+            "finskyOfferType": 1,
+            "listPrice": {
+              "amountInMicros": 3139000000,
+              "currencyCode": "INR"
+            },
+            "retailPrice": {
+              "amountInMicros": 3139000000,
+              "currencyCode": "INR"
+            }
+          }
+        ]
+      },
+      "accessInfo": {
+        "country": "IN",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": true
+        },
+        "pdf": {
+          "isAvailable": true
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=p5IIEAAAQBAJ&hl=&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "... Girl : <b>Gone Girl</b> and the Allure of Female Victim- hood , &quot; Domestic Noir : The New Face of 21st Century Crime Fiction , edited by Laura and Henry Sutton Joyce ( London : Palgrave Macmillan , 2018 ) , 81 . 10. Oliver Burkeman&nbsp;..."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "P4lXDwAAQBAJ",
+      "etag": "v4igekEFmoU",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/P4lXDwAAQBAJ",
+      "volumeInfo": {
+        "title": "Domestic Noir",
+        "subtitle": "The New Face of 21st Century Crime Fiction",
+        "authors": [
+          "Laura Joyce",
+          "Henry Sutton"
+        ],
+        "publisher": "Springer",
+        "publishedDate": "2018-04-23",
+        "description": "This book represents the first serious consideration of the 'domestic noir' phenomenon and, by extension, the psychological thriller. The only such landmark collection since Lee Horsley's The Noir Thriller, it extends the argument for serious, academic study of crime fiction, particularly in relation to gender, domestic violence, social and political awareness, psychological acuity, and structural and narratological inventiveness. As well as this, it shifts the debate around the sub-genre firmly up to date and brings together a range of global voices to dissect and situate the notion of 'domestic noir'. This book is essential reading for students, scholars, and fans of the psychological thriller.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9783319693385"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "3319693387"
+          }
+        ],
+        "readingModes": {
+          "text": true,
+          "image": true
+        },
+        "pageCount": 295,
+        "printType": "BOOK",
+        "categories": [
+          "Fiction"
+        ],
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "1.2.3.0.preview.3",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=P4lXDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=P4lXDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.co.in/books?id=P4lXDwAAQBAJ&pg=PA85&dq=gone+girl&hl=&cd=3&source=gbs_api",
+        "infoLink": "https://play.google.com/store/books/details?id=P4lXDwAAQBAJ&source=gbs_api",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=P4lXDwAAQBAJ"
+      },
+      "saleInfo": {
+        "country": "IN",
+        "saleability": "FOR_SALE",
+        "isEbook": true,
+        "listPrice": {
+          "amount": 10089,
+          "currencyCode": "INR"
+        },
+        "retailPrice": {
+          "amount": 10089,
+          "currencyCode": "INR"
+        },
+        "buyLink": "https://play.google.com/store/books/details?id=P4lXDwAAQBAJ&rdid=book-P4lXDwAAQBAJ&rdot=1&source=gbs_api",
+        "offers": [
+          {
+            "finskyOfferType": 1,
+            "listPrice": {
+              "amountInMicros": 10089000000,
+              "currencyCode": "INR"
+            },
+            "retailPrice": {
+              "amountInMicros": 10089000000,
+              "currencyCode": "INR"
+            }
+          }
+        ]
+      },
+      "accessInfo": {
+        "country": "IN",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.co.in/books/download/Domestic_Noir-sample-epub.acsm?id=P4lXDwAAQBAJ&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "pdf": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.co.in/books/download/Domestic_Noir-sample-pdf.acsm?id=P4lXDwAAQBAJ&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=P4lXDwAAQBAJ&hl=&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "... girl from down the road , the one who actually plays with the kids . &quot; ( Ibid . , p . 438 ) . 27. These internal contradictions undercut any potentially empowering inter ... GIRL TO DEAD GIRL : <b>GONE GIRL</b> AND THE ALLURE ... 85."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "9nIjEAAAQBAJ",
+      "etag": "saDmSe2mNqs",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/9nIjEAAAQBAJ",
+      "volumeInfo": {
+        "title": "Contemporary Crime Fiction",
+        "subtitle": "Crossing Boundaries, Merging Genres",
+        "authors": [
+          "Charlotte Beyer"
+        ],
+        "publisher": "Cambridge Scholars Publishing",
+        "publishedDate": "2021-03-01",
+        "description": "This unique and timely book presents nine compelling essays on contemporary crime fiction, bringing innovative and fresh perspectives to the analysis of this most popular and vibrant literary genre. Investigating contemporary crime fiction and the critical debates surrounding its reception and production, the introductory chapter sets the scene for the subsequent analyses of distinct crime fiction topics, themes and authors. The topics include the experimental detective narrative, race and ethnicity, historical crime fiction, domestic noir, feminism and crime, environmental crime, and the poetics of place. Authors examined here range from Ian Rankin, Gillian Flynn, Val McDermid, Denise Mina, Robert Galbraith, Nancy Bilyeau, and Martha Grimes, to Tana French, Dale Furutani, and J.G. Ballard, and more. Informed by the latest critical debates and theoretical perspectives in the field, this volume presents an invaluable source of information and criticism on crime fiction for students, researchers and academics alike.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9781527566866"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "1527566862"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": true
+        },
+        "pageCount": 226,
+        "printType": "BOOK",
+        "categories": [
+          "Literary Criticism"
+        ],
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "0.2.3.0.preview.1",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=9nIjEAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=9nIjEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.co.in/books?id=9nIjEAAAQBAJ&pg=PA100&dq=gone+girl&hl=&cd=4&source=gbs_api",
+        "infoLink": "https://play.google.com/store/books/details?id=9nIjEAAAQBAJ&source=gbs_api",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=9nIjEAAAQBAJ"
+      },
+      "saleInfo": {
+        "country": "IN",
+        "saleability": "FOR_SALE",
+        "isEbook": true,
+        "listPrice": {
+          "amount": 4657.2,
+          "currencyCode": "INR"
+        },
+        "retailPrice": {
+          "amount": 4657.2,
+          "currencyCode": "INR"
+        },
+        "buyLink": "https://play.google.com/store/books/details?id=9nIjEAAAQBAJ&rdid=book-9nIjEAAAQBAJ&rdot=1&source=gbs_api",
+        "offers": [
+          {
+            "finskyOfferType": 1,
+            "listPrice": {
+              "amountInMicros": 4657200000,
+              "currencyCode": "INR"
+            },
+            "retailPrice": {
+              "amountInMicros": 4657200000,
+              "currencyCode": "INR"
+            }
+          }
+        ]
+      },
+      "accessInfo": {
+        "country": "IN",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.co.in/books/download/Contemporary_Crime_Fiction-sample-pdf.acsm?id=9nIjEAAAQBAJ&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=9nIjEAAAQBAJ&hl=&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "Crossing Boundaries, Merging Genres Charlotte Beyer. THE &quot; <b>GONE GIRL</b> EFFECT &quot; : &quot; GIRLING &quot; THE FEMME FATALE IN GILLIAN FLYNN&#39;S <b>GONE GIRL</b> ROSIE COUCH From <b>Gone Girl</b> ( 2012 ) to The Girl on the Train ( 2015 ) , The Girls ( 2016 ) to Girls&nbsp;..."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "bziNEAAAQBAJ",
+      "etag": "T82oyr6ulrA",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/bziNEAAAQBAJ",
+      "volumeInfo": {
+        "title": "Gone Girl",
+        "authors": [
+          "Gillian Flynn"
+        ],
+        "publisher": "National Geographic Books",
+        "publishedDate": "2012",
+        "description": "When a woman goes missing on her fifth wedding anniversary, her diary reveals hidden turmoil in her marriage, while her husband, desperate to clear himself of suspicion, realizes that something more disturbing than murder may have occurred.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9780385366755"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "0385366752"
+          }
+        ],
+        "readingModes": {
+          "text": true,
+          "image": false
+        },
+        "pageCount": 0,
+        "printType": "BOOK",
+        "categories": [
+          "Fiction"
+        ],
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=bziNEAAAQBAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=bziNEAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.co.in/books?id=bziNEAAAQBAJ&dq=gone+girl&hl=&cd=5&source=gbs_api",
+        "infoLink": "http://books.google.co.in/books?id=bziNEAAAQBAJ&dq=gone+girl&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/Gone_Girl.html?hl=&id=bziNEAAAQBAJ"
+      },
+      "saleInfo": {
+        "country": "IN",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "IN",
+        "viewability": "NO_PAGES",
+        "embeddable": false,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=bziNEAAAQBAJ&hl=&source=gbs_api",
+        "accessViewStatus": "NONE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "On the warm summer morning of their fifth wedding anniversary, Nick Dunne&#39;s clever and beautiful wife, Amy, disappears from their rented McMansion on the Mississippi River."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "7M1CDwAAQBAJ",
+      "etag": "sqkiAW+oUFM",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/7M1CDwAAQBAJ",
+      "volumeInfo": {
+        "title": "Focus On: 100 Most Popular New Line Cinema Films",
+        "authors": [
+          "Wikipedia contributors"
+        ],
+        "publisher": "e-artnow sro",
+        "readingModes": {
+          "text": true,
+          "image": true
+        },
+        "pageCount": 1017,
+        "printType": "BOOK",
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "1.2.3.0.preview.3",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=7M1CDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=7M1CDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.co.in/books?id=7M1CDwAAQBAJ&pg=PA1669&dq=gone+girl&hl=&cd=6&source=gbs_api",
+        "infoLink": "http://books.google.co.in/books?id=7M1CDwAAQBAJ&dq=gone+girl&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/Focus_On_100_Most_Popular_New_Line_Cinem.html?hl=&id=7M1CDwAAQBAJ"
+      },
+      "saleInfo": {
+        "country": "IN",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "IN",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.co.in/books/download/Focus_On_100_Most_Popular_New_Line_Cinem-sample-epub.acsm?id=7M1CDwAAQBAJ&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "pdf": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.co.in/books/download/Focus_On_100_Most_Popular_New_Line_Cinem-sample-pdf.acsm?id=7M1CDwAAQBAJ&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=7M1CDwAAQBAJ&hl=&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "... <b>Gone Girl</b>&#39; vs. &#39;Annabelle&#39; &quot; . Screen Rant. Retrieved October 1, 2014. 22. ^ Bowles, Scott (October 2, 2014). &quot;Box Office Preview: &#39;<b>Gone Girl</b>,&#39; &#39;Annabelle&#39; To Dominate Weekend&quot; . Deadline.com. Retrieved October 3, 2014. 23. ^ Lang&nbsp;..."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "FJB_DwAAQBAJ",
+      "etag": "NEdRe+5LC6M",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/FJB_DwAAQBAJ",
+      "volumeInfo": {
+        "title": "Nice Try",
+        "subtitle": "Stories of Best Intentions and Mixed Results",
+        "authors": [
+          "Josh Gondelman"
+        ],
+        "publisher": "HarperCollins",
+        "publishedDate": "2019-09-17",
+        "description": "Nice Try is Emmy-Award winning writer and comedian Josh Gondelman's collection of personal stories of best intentions and mixed results. \"If you only read one book in your life, it probably shouldn't be this one. However, if you're not operating an inexplicable one-book policy, these stories are funny, touching, and more than worth your time.\" —John Oliver \"Josh Gondelman is one of the most original hilarious voices out there today. This book will hook you and make you laugh and laugh.\" —Amy Schumer Josh Gondelman knows a thing or two about trying—and failing. The stand-up comic—dubbed a \"pathological sweetheart\" by the New York Observer—is known throughout the industry as one of comedy's true \"nice guys.\" Not surprisingly, he's endured his share of last-place finishes. But he keeps on bouncing back. In this collection of hilarious and poignant essays (including his acclaimed New York Times piece \"What if I Bombed at My Own Wedding?\"), Josh celebrates a life of good intentions—and mixed results. His true tales of romantic calamities, professional misfortunes, and eventual triumphs reinforce the notion: we get out of the world what we put into it. Whether he's adopting a dog from a suspicious stranger, mitigating a disastrous road trip, or trying MDMA for the first (and only) time, Josh only wants the best for everyone—even as his attempts to do the right thing occasionally implode. Full of the warm and relatable humor that's made him a favorite on the comedy club circuit, Nice Try solidifies Josh Gondelman's reputation as not just a good guy, but a skilled observer of the human condition.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9780062852762"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "0062852760"
+          }
+        ],
+        "readingModes": {
+          "text": true,
+          "image": false
+        },
+        "pageCount": 298,
+        "printType": "BOOK",
+        "categories": [
+          "Humor"
+        ],
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": true,
+        "contentVersion": "1.9.8.0.preview.2",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=FJB_DwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=FJB_DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.co.in/books?id=FJB_DwAAQBAJ&pg=PT20&dq=gone+girl&hl=&cd=7&source=gbs_api",
+        "infoLink": "https://play.google.com/store/books/details?id=FJB_DwAAQBAJ&source=gbs_api",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=FJB_DwAAQBAJ"
+      },
+      "saleInfo": {
+        "country": "IN",
+        "saleability": "FOR_SALE",
+        "isEbook": true,
+        "listPrice": {
+          "amount": 335.12,
+          "currencyCode": "INR"
+        },
+        "retailPrice": {
+          "amount": 234.58,
+          "currencyCode": "INR"
+        },
+        "buyLink": "https://play.google.com/store/books/details?id=FJB_DwAAQBAJ&rdid=book-FJB_DwAAQBAJ&rdot=1&source=gbs_api",
+        "offers": [
+          {
+            "finskyOfferType": 1,
+            "listPrice": {
+              "amountInMicros": 335120000,
+              "currencyCode": "INR"
+            },
+            "retailPrice": {
+              "amountInMicros": 234580000,
+              "currencyCode": "INR"
+            }
+          }
+        ]
+      },
+      "accessInfo": {
+        "country": "IN",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.co.in/books/download/Nice_Try-sample-epub.acsm?id=FJB_DwAAQBAJ&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=FJB_DwAAQBAJ&hl=&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "... <b>Gone Girl</b> because it was a movie based on a book, which is a lot like a book. That was the only fact I knew about <b>Gone Girl</b> when we walked in. It turns out that in the movie <b>Gone Girl</b>, Rosamund Pike plays <b>Gone Girl</b>, who marries Ben&nbsp;..."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "S_fZDAAAQBAJ",
+      "etag": "hwBQ0MBNugE",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/S_fZDAAAQBAJ",
+      "volumeInfo": {
+        "title": "Seduction in Popular Culture, Psychology, and Philosophy",
+        "authors": [
+          "Martins, Constantino",
+          "Damásio, Manuel"
+        ],
+        "publisher": "IGI Global",
+        "publishedDate": "2016-08-15",
+        "description": "Seduction is a complicated concept that is a part of the general human experience. Despite the prevalence of seduction in our personal lives as well as within popular culture, the concept has not been widely discussed and researched as an academic field. Seduction in Popular Culture, Psychology, and Philosophy explores the concept of seduction and the many ways it can be understood, either as a social and individual practice, a psychological trait, or a schema for manipulation. Taking a cross-disciplinary approach, this publication features research-based chapters relevant to sociologists, media professionals, psychologists, philosophers, advertising professionals, researchers, and graduate level students studying in related areas.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9781522505266"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "1522505261"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": true
+        },
+        "pageCount": 352,
+        "printType": "BOOK",
+        "categories": [
+          "Psychology"
+        ],
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "0.1.1.0.preview.1",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=S_fZDAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=S_fZDAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.co.in/books?id=S_fZDAAAQBAJ&pg=PA108&dq=gone+girl&hl=&cd=8&source=gbs_api",
+        "infoLink": "https://play.google.com/store/books/details?id=S_fZDAAAQBAJ&source=gbs_api",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=S_fZDAAAQBAJ"
+      },
+      "saleInfo": {
+        "country": "IN",
+        "saleability": "FOR_SALE",
+        "isEbook": true,
+        "listPrice": {
+          "amount": 18751.31,
+          "currencyCode": "INR"
+        },
+        "retailPrice": {
+          "amount": 18751.31,
+          "currencyCode": "INR"
+        },
+        "buyLink": "https://play.google.com/store/books/details?id=S_fZDAAAQBAJ&rdid=book-S_fZDAAAQBAJ&rdot=1&source=gbs_api",
+        "offers": [
+          {
+            "finskyOfferType": 1,
+            "listPrice": {
+              "amountInMicros": 18751310000,
+              "currencyCode": "INR"
+            },
+            "retailPrice": {
+              "amountInMicros": 18751310000,
+              "currencyCode": "INR"
+            }
+          }
+        ]
+      },
+      "accessInfo": {
+        "country": "IN",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.co.in/books/download/Seduction_in_Popular_Culture_Psychology-sample-pdf.acsm?id=S_fZDAAAQBAJ&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=S_fZDAAAQBAJ&hl=&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "... <b>GONE GIRL</b> And The Maybe-Art Of Post-Feminist Pulp. Badass Digest. Retrieved from http://badass- digest.com/2015/01/13/film-crit-hulk-smash-dialogues-<b>gone</b>-<b>girl</b>-and-the-maybe- art-of-post-feminist/ Inherent Vice. (2015). The Dissolve&nbsp;..."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "eKVQEAAAQBAJ",
+      "etag": "hfCOUt3aiEM",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/eKVQEAAAQBAJ",
+      "volumeInfo": {
+        "title": "A Cultural History of Marriage in the Modern Age",
+        "authors": [
+          "Christina Simmons"
+        ],
+        "publisher": "Bloomsbury Publishing",
+        "publishedDate": "2021-11-18",
+        "description": "Spanning cultures across the 20th century, this volume explores how marriage, especially in the West, was disestablished as the primary institution organizing social life. In the developing world, the economic, social, and legal foundations of traditional marriage are stronger but also weakening. Marriage changed because an industrial wage economy reduced familial patriarchal control of youth and women and spurred demands and possibilities for greater autonomy and choice in love. After the Second World War, when more married women pursued education and employment, and gays and lesbians gained visibility, feminism and gay liberation also challenged patriarchal and restrictive gender roles and helped to reshape marriage. In 1920 most people married for life; in the twenty-first century fewer marry, and serial monogamy prevails. Marriage is more diverse and flexible in form but also more fragile and optional than it once was. Over the century control of courtship shifted from parents to youth, and friends, as opposed to kin, became more important in sustaining marriages. Dual-wage-earner families replaced the male breadwinner. Social and political liberalism assailed conservative laws and religious regimes, expanding access to divorce and birth control. Although norms of masculinity and femininity retain huge power in most cultures, visions of more egalitarian and romantic love as the basis of marriage have gained traction-made appealing by the global spread of capitalist social relations and also broadcast by culture industries in the developed world. The legalization of same-sex marriage-in over twenty-five nations by 2020-epitomizes a century of change toward a less gender-defined ideal that includes a continued desire for social recognition and permanence. A Cultural History of Marriage in the Modern Age presents an overview of the period with essays on Courtship and Ritual; Religion, State and Law; Kinship and Social Networks; the Family Economy; Love and Sex; the Breaking of Vows; and Representations of Marriage.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9781350179783"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "1350179787"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": true
+        },
+        "pageCount": 230,
+        "printType": "BOOK",
+        "categories": [
+          "History"
+        ],
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "0.1.1.0.preview.1",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=eKVQEAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=eKVQEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.co.in/books?id=eKVQEAAAQBAJ&pg=PA154&dq=gone+girl&hl=&cd=9&source=gbs_api",
+        "infoLink": "https://play.google.com/store/books/details?id=eKVQEAAAQBAJ&source=gbs_api",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=eKVQEAAAQBAJ"
+      },
+      "saleInfo": {
+        "country": "IN",
+        "saleability": "FOR_SALE",
+        "isEbook": true,
+        "listPrice": {
+          "amount": 7942,
+          "currencyCode": "INR"
+        },
+        "retailPrice": {
+          "amount": 7942,
+          "currencyCode": "INR"
+        },
+        "buyLink": "https://play.google.com/store/books/details?id=eKVQEAAAQBAJ&rdid=book-eKVQEAAAQBAJ&rdot=1&source=gbs_api",
+        "offers": [
+          {
+            "finskyOfferType": 1,
+            "listPrice": {
+              "amountInMicros": 7942000000,
+              "currencyCode": "INR"
+            },
+            "retailPrice": {
+              "amountInMicros": 7942000000,
+              "currencyCode": "INR"
+            }
+          }
+        ]
+      },
+      "accessInfo": {
+        "country": "IN",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": true
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=eKVQEAAAQBAJ&hl=&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "... <b>Gone Girl</b> departs from the formula of earlier marriage thrillers in two important ways : ( 1 ) the psychopath murderer is the wife , not the husband , and ( 2 ) at the end of the film , the married couple stays together . <b>Gone Girl&#39;s</b>&nbsp;..."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "Ha2YEAAAQBAJ",
+      "etag": "G8o3GBA6qEM",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/Ha2YEAAAQBAJ",
+      "volumeInfo": {
+        "title": "The Palgrave Encyclopedia of Urban Literary Studies",
+        "authors": [
+          "Jeremy Tambling"
+        ],
+        "publisher": "Springer Nature",
+        "publishedDate": "2022-10-29",
+        "description": "This encyclopaedia will be an indispensable resource and recourse for all who are thinking about cities and the urban, and the relation of cities to literature, and to ways of writing about cities. Covering a vast terrain, this work will include entries on theorists, individual writers, individual cities, countries, cities in relation to the arts, film and music, urban space, pre/early and modern cities, concepts and movements and definitions amongst others. Written by an international team of contributors, this will be the first resource of its kind to pull together such a comprehensive overview of the field.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9783319624198"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "3319624199"
+          }
+        ],
+        "readingModes": {
+          "text": true,
+          "image": true
+        },
+        "pageCount": 1977,
+        "printType": "BOOK",
+        "categories": [
+          "Literary Criticism"
+        ],
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "0.3.3.0.preview.3",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=Ha2YEAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=Ha2YEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.co.in/books?id=Ha2YEAAAQBAJ&pg=PA660&dq=gone+girl&hl=&cd=10&source=gbs_api",
+        "infoLink": "https://play.google.com/store/books/details?id=Ha2YEAAAQBAJ&source=gbs_api",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=Ha2YEAAAQBAJ"
+      },
+      "saleInfo": {
+        "country": "IN",
+        "saleability": "FOR_SALE",
+        "isEbook": true,
+        "listPrice": {
+          "amount": 46256,
+          "currencyCode": "INR"
+        },
+        "retailPrice": {
+          "amount": 46256,
+          "currencyCode": "INR"
+        },
+        "buyLink": "https://play.google.com/store/books/details?id=Ha2YEAAAQBAJ&rdid=book-Ha2YEAAAQBAJ&rdot=1&source=gbs_api",
+        "offers": [
+          {
+            "finskyOfferType": 1,
+            "listPrice": {
+              "amountInMicros": 46256000000,
+              "currencyCode": "INR"
+            },
+            "retailPrice": {
+              "amountInMicros": 46256000000,
+              "currencyCode": "INR"
+            }
+          }
+        ]
+      },
+      "accessInfo": {
+        "country": "IN",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.co.in/books/download/The_Palgrave_Encyclopedia_of_Urban_Liter-sample-epub.acsm?id=Ha2YEAAAQBAJ&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "pdf": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.co.in/books/download/The_Palgrave_Encyclopedia_of_Urban_Liter-sample-pdf.acsm?id=Ha2YEAAAQBAJ&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=Ha2YEAAAQBAJ&hl=&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "Jeremy Tambling. STOP Finances and Focalization in Flynn&#39;s <b>Gone Girl</b> , Fig . 2 Nick sees some of the less affluent on his way to The Bar me photos of Cape Girardeau , and there was that great ... <b>Gone Girl</b> Acknowledgment Bibliography."
+      }
+    }
+  ]
+}

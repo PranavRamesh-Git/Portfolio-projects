@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <header>
+        <nav class="navbar">
+            <button type="button" id="discoverButton">DISCOVER</button>
+            <button type="button" id="mybooksButton">MY BOOKS</button>
+            <a href="{{ url_for('logout') }}">LOGOUT</a>
+        </nav>
+    </header>
+{% endblock %}
+
+{% block content %}
+
+    <section id="discover-section" class="pagesection active">
+        <h1>DISCOVER BOOKS</h1>
+        <div class="searchFilters">
+
+            <div class="search">
+                <input
+                    id="search"
+                    name="search"
+                    placeholder="SEARCH BOOKS, AUTHORS..."
+                    type="text"
+                >
+            </div>
+            <div class="filters">
+                <select name="orderby" id="orderby">
+                    <option value="relevance">RELEVANCE</option>
+                    <option value="newest">NEWEST</option>
+                </select>
+                <div class="applySearch">
+                    <button id="submit" type="button">APPLY</button>
+                    <button id="clear" type="button">CLEAR</button>
+                </div>
+            </div>
+        </div>       
+        <div class="books-container" id="books-container">
+            
+        </div>
+
+    </section>
+
+    <section id="mybooks-section" class="pagesection">
+        <h1>MY BOOKS</h1>
+        <div class="books-container" id="mybooks-container">
+
+
+        </div>
+    </section>
+
+
+    <div class="modal" id="view-modal">
+        <div class="view-modal">
+            <p>DESCRIPTION :</p>
+            <p class="summary" id="summary"></p>
+            <button type="button" id="close-modal">CLOSE</button>
+        </div>
+    </div>    
+ 
+
+{% endblock %}
